@@ -4,7 +4,7 @@ date: '2025-09-23'
 authors:
   - name: Emma Daniels
     github: ammedd
-summary: "Read about our first -very succesful- year of education with VirtualShip!"
+summary: 'Read about our first -very succesful- year of education with VirtualShip!'
 ---
 
 We’ve just published **"The Virtual Ship Classroom: Developing Virtual Fieldwork as an Authentic Learning Environment for Physical Oceanography"** in Current: the journal of marine education.

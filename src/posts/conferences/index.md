@@ -4,7 +4,7 @@ date: '2025-09-19'
 authors:
   - name: Emma Daniels
     github: ammedd
-summary: "VirtualShip has been showcased at several (inter)national conferences:"
+summary: 'VirtualShip has been showcased at several (inter)national conferences:'
 ---
 
 Just this year, you could have seen us at:
