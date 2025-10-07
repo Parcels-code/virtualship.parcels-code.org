@@ -11,7 +11,7 @@ export default function IndexPage() {
       card={
         'https://raw.githubusercontent.com/OceanParcels/oceanparcels_website/main/public/virtualship-assets/virtual_ship_logo_no-text.png'
       }
-      enableBanner
+      // enableBanner
     >
       <HeroBanner />
       <Features />
