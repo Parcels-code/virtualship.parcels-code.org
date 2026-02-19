@@ -11,4 +11,10 @@ export const Funders = [
     logo_dark: '/funders-logos/NIOZlogo.png',
     url: 'https://www.nioz.nl/en',
   },
+  {
+    name: 'Nationaal Kennisinstituut Onderwijs',
+    logo_light: '/funders-logos/NKOlogo.png',
+    logo_dark: '/funders-logos/NKOlogo.png',
+    url: 'https://www.nko.nl/en',
+  },
 ]
