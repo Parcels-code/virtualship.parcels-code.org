@@ -4,7 +4,7 @@ date: '2026-02-20'
 authors:
   - name: Erik van Sebille
     github: erikvansebille
-summary: 'VirtucalShip has received funding to support scaling up in courses at four other universities'
+summary: 'VirtualShip has received funding to support scaling up in courses at four other universities'
 ---
 
 We are excited to announce that we have received 100k€ funding to scale up the VirtualShip project and implement and sustainably embed the VirtualShip Classroom platform at four other universities!
