@@ -7,7 +7,7 @@ authors:
 summary: 'VirtualShip has received funding to support scaling up in courses at four other universities'
 ---
 
-We are excited to announce that we have received 100k€ funding to scale up the VirtualShip project and implement and sustainably embed the VirtualShip Classroom platform at four other universities!
+We are excited to announce that we have received €100k funding to scale up the VirtualShip project and implement and sustainably embed the VirtualShip Classroom platform at four other universities!
 
 The project **Virtual ocean fieldwork: the VirtualShip Classroom platform for
 interdisciplinary marine education** has been funded by the [Dutch National Education Institute (NKO)](https://www.nko.nl/en) and provides 30 months of support to work with coordinators, lecturers and teaching assistants to use the VirtualShip in courses ranging from undergraduate biology to graduate civil engineering.
