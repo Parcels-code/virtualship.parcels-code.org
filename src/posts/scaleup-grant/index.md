@@ -14,7 +14,7 @@ interdisciplinary marine education** has been funded by the [Dutch National Educ
 
 We will continue to make all VirtualShip Classroom material available online under a permissive open-access license through GitHub and the VirtualShip website. We will also make our material available as an e-course on [edusources](https://edusources.nl).
 
-The results of this project will also be relevant for educational professionals in other contexts where fieldwork is an important aspect of learning. We will therefore ensure that we disseminate our results also to the broader education innovation community, for example through scientific articles, the Centers for Academic Learning, Teaching and Education Support at the universities involved.
+The results of this project will also be relevant for educational professionals in other contexts where fieldwork is an important aspect of learning. We will therefore ensure that we disseminate our results also to the broader education innovation community, for example through scientific articles, as well as the Centers for Academic Learning, Teaching and Education Support at the universities involved.
 
 See below the summary of the project, written by Erik van Sebille, Emma Daniels, Jamie Atkins, Tinka Murk, Jasper de Goeij, Renske Gelderloos, and Britas Klemens Eriksson:
 
