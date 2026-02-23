@@ -12,12 +12,11 @@ We are excited to announce that we have received 100k€ funding to scale up the
 The project **Virtual ocean fieldwork: the VirtualShip Classroom platform for
 interdisciplinary marine education** has been funded by the [Dutch National Education Institute (NKO)](https://www.nko.nl/en) and provides 30 months of support to work with coordinators, lecturers and teaching assistants to use the VirtualShip in courses ranging from undergraduate biology to graduate civil engineering.
 
-We will continue to make all VirtualShip Classroom material available online under a permissive open-access license through GitHub and the VirtualShip website. We will also make our material available as an e-course on the Ulearning platform.
+We will continue to make all VirtualShip Classroom material available online under a permissive open-access license through GitHub and the VirtualShip website. We will also make our material available as an e-course on [edusources](https://edusources.nl).
 
-The results of this project will also be relevant for educational professionals in other contexts where fieldwork is an important aspect of learning. We will therefore ensure that we disseminate our results also to the broader education innovation community, for example through the Centers for Academic Learning, Teaching and Education Support at the universities involved.
+The results of this project will also be relevant for educational professionals in other contexts where fieldwork is an important aspect of learning. We will therefore ensure that we disseminate our results also to the broader education innovation community, for example through scientific articles, the Centers for Academic Learning, Teaching and Education Support at the universities involved.
 
-See below the summary of the project, written by Erik van Sebille, Emma Daniels, Jamie Atkins, Tinka Murk, Jasper de Goeij, Renske Gelderloos, and Britas Klemens
-Eriksson:
+See below the summary of the project, written by Erik van Sebille, Emma Daniels, Jamie Atkins, Tinka Murk, Jasper de Goeij, Renske Gelderloos, and Britas Klemens Eriksson:
 
 _Marine science relies on fieldwork on and in the ocean for data-collection. This means that marine science students need to be trained in sea-going fieldwork. However, such training is expensive, logistically challenging, and an environmental burden because ships emit significant amounts of CO2._
 
