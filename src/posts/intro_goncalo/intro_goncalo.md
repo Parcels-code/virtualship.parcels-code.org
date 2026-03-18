@@ -2,7 +2,7 @@
 title: 'Hello from Goncalo'
 date: '2025-04-30'
 authors:
-  - name: Jamie Atkins
+  - name: Gonçalo
     github: j-atkins
 summary: "I'm Jamie and I’ve just joined the VirtualShip team as a Postdoctoral Researcher!"
 ---
