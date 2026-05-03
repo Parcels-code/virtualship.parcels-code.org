@@ -18,7 +18,7 @@ export const FindUs = () => {
   const findus = React.useMemo(() => data, [])
   return (
     <Box id={'findus'} as='section'>
-      <Container maxW='container.lg' centerContent>
+      <Container maxW='container.lg' py={0} centerContent>
         <Heading as='h1' size='2xl'>
           Find us on
         </Heading>
@@ -30,11 +30,11 @@ export const FindUs = () => {
             my={4}
             justifyContent='center'
           >
-            {findus.map((findus, index) => (
-              <Tooltip key={index} label={findus.name}>
+            {findus.map((item, index) => (
+              <Tooltip key={index} label={item.name}>
                 <GridItem
                   as={Link}
-                  href={findus.url}
+                  href={item.url}
                   display='flex'
                   alignItems='center'
                   justifyContent='center'
@@ -44,10 +44,10 @@ export const FindUs = () => {
                   pr={4}
                 >
                   <ColorModeImage
-                    lightSrc={findus.logo_light}
-                    darkSrc={findus.logo_dark}
+                    lightSrc={item.logo_light}
+                    darkSrc={item.logo_dark}
                     maxH={20}
-                    alt={findus.name}
+                    alt={item.name}
                   />
                 </GridItem>
               </Tooltip>

@@ -5,10 +5,7 @@ import React from 'react'
 export const VideoDemo = () => {
   return (
     <Box id={'video-demo'} as='section' my={12}>
-      <Container maxW='container.lg' centerContent>
-        <Heading as='h1' size='2xl' mb={4}>
-          Getting started with VirtualShip
-        </Heading>
+      <Container maxW='container.lg' pt={0} centerContent>
         <Box
           w='100%'
           maxW='800px'

@@ -9,14 +9,7 @@ import {
   Stack,
 } from '@chakra-ui/react'
 
-export const Paper = ({
-  title,
-  published_info,
-  authors,
-  doi,
-  abstract,
-  number,
-}) => {
+export const Paper = ({ title, published_info, authors, doi, abstract }) => {
   return (
     <AccordionItem
       my={4}
