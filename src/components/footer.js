@@ -55,7 +55,7 @@ export const Footer = () => {
     >
       <Container maxW='container.lg' my={8} centerContent>
         <SimpleGrid
-          columns={{ base: 1, sm: 2, md: 4 }}
+          columns={{ base: 1, sm: 2, md: 3 }}
           spacing={{ base: 2, md: 8 }}
         >
           <Stack spacing={6}>
@@ -69,28 +69,13 @@ export const Footer = () => {
             </Box>
 
             <Text fontSize={'sm'}>
-              © {new Date().getFullYear()}, VirtualShip developers. Apache 2.0
-              Licensed.
+              © {new Date().getFullYear()}, VirtualShip developers.
             </Text>
-          </Stack>
-          <Stack align={'flex-start'}>
-            <ListHeader>Parcels</ListHeader>
-
-            {footerItems.parcels.map((item) => {
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  fontSize={'sm'}
-                  _hover={{ color: 'blue.500' }}
-                >
-                  {item.label}
-                </Link>
-              )
-            })}
+            <Text fontSize={'sm'}>Apache 2.0 Licensed.</Text>
           </Stack>
           <Stack align={'flex-start'}>
             <ListHeader>Resources</ListHeader>
+
             {footerItems.resources.map((item) => {
               return (
                 <Link
@@ -105,8 +90,8 @@ export const Footer = () => {
             })}
           </Stack>
           <Stack align={'flex-start'}>
-            <ListHeader>Community</ListHeader>
-            {footerItems.community.map((item) => {
+            <ListHeader>Documentation</ListHeader>
+            {footerItems.documentation.map((item) => {
               return (
                 <Link
                   key={item.label}
