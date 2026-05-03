@@ -1,5 +1,7 @@
 export { Banner } from '@/components/banner'
 export { Projects } from '@/components/projects'
+export { FindUs } from '@/components/findus'
+export { GetStarted } from '@/components/getstarted'
 export { Funders } from '@/components/funders'
 export { Features } from '@/components/features'
 export { Footer } from '@/components/footer'

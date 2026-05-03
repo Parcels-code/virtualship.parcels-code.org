@@ -4,7 +4,7 @@ import { Image, Link } from '@/components/mdx'
 
 export const HeroBanner = () => {
   return (
-    <Box as='section'>
+    <Box id='about' as='section'>
       <Container maxW='container.lg' py={24} centerContent>
         <Stack
           align={'center'}
@@ -52,22 +52,6 @@ export const HeroBanner = () => {
                 objectFit='contain'
               ></Image>
             }
-
-            <Stack
-              spacing={{ base: 4, sm: 6 }}
-              justify={'center'}
-              direction={{ base: 'column', sm: 'row' }}
-            >
-              <Button
-                useExternalIcon
-                as={Link}
-                variant={'outline'}
-                colorScheme={'blue'}
-                href='https://virtualship.readthedocs.io/en/latest/'
-              >
-                Get Started
-              </Button>
-            </Stack>
           </Stack>
         </Stack>
       </Container>
