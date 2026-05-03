@@ -56,7 +56,7 @@ export const Layout = ({
           rel='icon'
           type='image/png'
           sizes='96x96'
-          href='/virtualship-assets/virtual_ship_logo_no-text.png'
+          href='/virtualship-assets/logo_no-text.png'
         />
         <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
         <link rel='icon' type='image/png' href='/favicon.png' />

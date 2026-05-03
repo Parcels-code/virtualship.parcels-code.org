@@ -1,10 +1,6 @@
 export const menuItems = [
+  { label: 'About', href: '/#about' },
   { label: 'Features', href: '/#features' },
-  // { label: 'Projects', href: '/#projects' }, TODO uncomment when projects are ready
-  { label: 'Funders', href: '/#funders' },
+  { label: 'Publications', href: '/publications' },
   { label: 'Blog', href: '/blog' },
-  {
-    label: 'Documentation',
-    href: 'https://virtualship.readthedocs.io/en/latest/',
-  },
 ]

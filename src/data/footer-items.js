@@ -1,14 +1,14 @@
 export const footerItems = {
-  parcels: [
-    { label: 'Blog', href: '/blog' },
+  resources: [
     {
       label: 'Brand Assets',
       href: 'https://github.com/OceanParcels/virtualship_website/tree/main/public/virtualship-assets',
     },
     { label: 'Accessibility', href: '/accessibility' },
+    { label: 'Parcels', href: 'https://parcels-code.org' },
   ],
 
-  resources: [
+  documentation: [
     {
       label: 'Documentation',
       href: 'https://virtualship.readthedocs.io/en/latest/',

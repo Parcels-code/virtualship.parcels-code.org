@@ -4,8 +4,8 @@ import { Image, Link } from '@/components/mdx'
 
 export const HeroBanner = () => {
   return (
-    <Box as='section'>
-      <Container maxW='container.lg' py={24} centerContent>
+    <Box id='about' as='section'>
+      <Container maxW='container.lg' pt={24} centerContent>
         <Stack
           align={'center'}
           spacing={{ base: 8, md: 10 }}
@@ -38,7 +38,7 @@ export const HeroBanner = () => {
                 Explore the ocean with a virtual research vessel
               </Text>
             </Heading>
-            <Text fontSize={'lg'}>
+            <Text fontSize={'lg'} mt={0}>
               <strong>VirtualShip</strong> provides a framework to plan and
               conduct a virtual research expedition, receiving measurements as
               if they were coming from actual oceanographic instruments.
@@ -52,22 +52,6 @@ export const HeroBanner = () => {
                 objectFit='contain'
               ></Image>
             }
-
-            <Stack
-              spacing={{ base: 4, sm: 6 }}
-              justify={'center'}
-              direction={{ base: 'column', sm: 'row' }}
-            >
-              <Button
-                useExternalIcon
-                as={Link}
-                variant={'outline'}
-                colorScheme={'blue'}
-                href='https://virtualship.readthedocs.io/en/latest/'
-              >
-                Get Started
-              </Button>
-            </Stack>
           </Stack>
         </Stack>
       </Container>
