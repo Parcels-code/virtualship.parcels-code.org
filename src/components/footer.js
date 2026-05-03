@@ -62,8 +62,8 @@ export const Footer = () => {
             <Box>
               <ColorModeImage
                 w={32}
-                lightSrc={'/virtualship-assets/virtual_ship_logo.png'}
-                darkSrc={'/virtualship-assets/virtual_ship_logo_inverted.png'}
+                lightSrc={'/virtualship-assets/logo-horo.png'}
+                darkSrc={'/virtualship-assets/logo-horo_dia.png'}
                 alt={'parcels logo'}
               />
             </Box>

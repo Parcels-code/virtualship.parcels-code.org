@@ -15,7 +15,7 @@ const feed = new Feed({
     id: blogUrl,
     link: blogUrl,
     language: 'en',
-    image: `${siteUrl}/virtualship-assets/virtual_ship_logo_no-text.png`,
+    image: `${siteUrl}/virtualship-assets/logo_no-text.png`,
     favicon: `${siteUrl}/favicon.ico`,
     copyright: `© ${new Date().getFullYear()}, VirtualShip developers. Apache 2.0 Licensed`,
     feedLinks: {
