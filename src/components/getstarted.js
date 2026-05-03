@@ -1,4 +1,9 @@
 import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
   Box,
   Button,
   Container,
@@ -17,6 +22,7 @@ import { Heading } from '@/components/mdx'
 
 export const GetStarted = () => {
   const getstarted = React.useMemo(() => data, [])
+  const [activeIndex, setActiveIndex] = React.useState(null)
   return (
     <Box id={'getstarted'} as='section'>
       <Container maxW='container.lg' centerContent>
@@ -24,25 +30,40 @@ export const GetStarted = () => {
           Get started as
         </Heading>
 
-        <Box my={8}>
+        <Box my={0} width='100%'>
           <Grid
-            templateColumns={`repeat(${getstarted.length}, minmax(auto, max-content))`}
+            templateColumns={`repeat(${getstarted.length}, 1fr)`}
             gap={6}
-            my={4}
-            justifyContent='center'
+            my={0}
+            width='100%'
           >
-            {getstarted.map((getstarted, index) => (
+            {getstarted.map((item, index) => (
               <Button
-                useExternalIcon
-                as={Link}
-                // variant={'outline'}
-                colorScheme={'blue'}
-                href='{getstarted.url}'
+                key={index}
+                bg='blue.400'
+                color='white'
+                _hover={{ bg: 'blue.700' }}
+                borderRadius='md'
+                width='100%'
+                height='64px'
+                fontSize='2xl'
+                fontWeight='bold'
+                onClick={() =>
+                  setActiveIndex(activeIndex === index ? null : index)
+                }
+                display='flex'
+                alignItems='center'
+                justifyContent='center'
               >
-                {getstarted.name}
+                {item.name}
               </Button>
             ))}
           </Grid>
+          {activeIndex !== null && (
+            <Box mt={4} width='100%'>
+              <Text fontSize={'lg'}>{getstarted[activeIndex].text}</Text>
+            </Box>
+          )}
         </Box>
       </Container>
     </Box>

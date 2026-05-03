@@ -1,26 +1,18 @@
 export const GetStarted = [
   {
     name: 'Learner',
-    // logo_light: '/funders-logos/UUlogo.png',
-    // logo_dark: '/funders-logos/UUlogo_dia.png',
-    // url: 'https://www.uu.nl/en',
+    text: 'As a learner, you will ...',
   },
   {
     name: 'Educator',
-    // logo_light: '/funders-logos/NIOZlogo.png',
-    // logo_dark: '/funders-logos/NIOZlogo.png',
-    // url: 'https://www.nioz.nl/en',
+    text: 'As an educator, you can use the VirtualShip to ...',
   },
   {
     name: 'Researcher',
-    // logo_light: '/funders-logos/NKOlogo.png',
-    // logo_dark: '/funders-logos/NKOlogo.png',
-    // url: 'https://www.nko.nl/en',
+    text: 'As a researcher, you can use the VirtualShip to ...',
   },
   {
     name: 'Developer',
-    // logo_light: '/funders-logos/NKOlogo.png',
-    // logo_dark: '/funders-logos/NKOlogo.png',
-    // url: 'https://www.nko.nl/en',
+    text: 'As a developer, you can help improve VirtualShip by ...',
   },
 ]
