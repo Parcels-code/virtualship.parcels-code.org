@@ -9,8 +9,8 @@ const config = {
 }
 
 const fonts = {
-  body: "'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-  heading: "'Inter Variable', 'Work Sans', system-ui, sans-serif",
+  body: "'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+  heading: "'Open Sans', 'Work Sans', system-ui, sans-serif",
 }
 
 export const customTheme = extendTheme(

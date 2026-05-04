@@ -42,6 +42,23 @@ export const Layout = ({
   return (
     <>
       <Head>
+        {/* Open Sans font-face for global usage */}
+        <style>{`
+          @font-face {
+            font-family: 'Open Sans';
+            src: url('/fonts/OpenSans-VariableFont_wdth,wght.ttf') format('truetype');
+            font-weight: 1 1000;
+            font-style: normal;
+            font-display: swap;
+          }
+          @font-face {
+            font-family: 'Open Sans';
+            src: url('/fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+            font-weight: 1 1000;
+            font-style: italic;
+            font-display: swap;
+          }
+        `}</style>
         <meta content='IE=edge' httpEquiv='X-UA-Compatible' />
         <meta content='width=device-width, initial-scale=1' name='viewport' />
         <meta property='og:title' content={title} />
