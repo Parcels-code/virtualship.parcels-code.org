@@ -13,4 +13,4 @@ Amongst the several NIOZ research vessel 360° tours and videos on how to use an
 
 ![Photo at NIOZ library](./IMG_20260521_164537.jpg)
 
-![VRflyer](./%20VR_VirtualShip_flyer.jpg)
+![VRflyer](./VR_VirtualShip_flyer.jpg)
