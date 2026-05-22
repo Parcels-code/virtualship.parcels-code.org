@@ -1,6 +1,6 @@
 ---
 title: 'VR headset for NIOZ’s library'
-date: '2025-05-22'
+date: '2026-05-22'
 authors:
   - name: Gonçalo Albergaria
     github: GoncaloAlbergaria
