@@ -82,7 +82,8 @@ export const Footer = () => {
                   key={item.label}
                   href={item.href}
                   fontSize={'sm'}
-                  _hover={{ color: 'blue.500' }}
+                  textDecoration='none'
+                  _hover={{ color: 'blue.500', textDecoration: 'none' }}
                 >
                   {item.label}
                 </Link>
@@ -97,7 +98,8 @@ export const Footer = () => {
                   key={item.label}
                   href={item.href}
                   fontSize={'sm'}
-                  _hover={{ color: 'blue.500' }}
+                  textDecoration='none'
+                  _hover={{ color: 'blue.500', textDecoration: 'none' }}
                 >
                   {item.label}
                 </Link>

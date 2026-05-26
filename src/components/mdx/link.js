@@ -7,17 +7,33 @@ export const Link = React.forwardRef(function CustomLink(props, ref) {
   const href = props.href
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'))
   const { useExternalIcon, ...rest } = props
+  const defaultLinkStyles = {
+    color: 'blue.600',
+    textDecoration: 'underline',
+    textUnderlineOffset: '2px',
+    textDecorationThickness: '1px',
+    _hover: {
+      color: 'blue.700',
+      textDecorationThickness: '2px',
+    },
+  }
 
   if (isInternalLink) {
     return (
-      <ChakraLink as={NextLink} ref={ref} {...rest}>
+      <ChakraLink as={NextLink} ref={ref} {...defaultLinkStyles} {...rest}>
         {rest.children}
       </ChakraLink>
     )
   }
 
   return (
-    <ChakraLink isExternal {...rest} as={NextLink} ref={ref}>
+    <ChakraLink
+      isExternal
+      as={NextLink}
+      ref={ref}
+      {...defaultLinkStyles}
+      {...rest}
+    >
       {rest.children}
       {useExternalIcon && <ExternalLinkIcon mx='2px' />}
     </ChakraLink>

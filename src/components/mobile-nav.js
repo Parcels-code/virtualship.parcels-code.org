@@ -29,6 +29,7 @@ const MobileNavItem = ({ href, children, label }) => {
         href={href ?? '/#'}
         justify={'space-between'}
         align={'center'}
+        textDecoration='none'
         _hover={{
           textDecoration: 'none',
         }}
@@ -64,7 +65,12 @@ const MobileNavItem = ({ href, children, label }) => {
           {' '}
           {children &&
             children.map((child, index) => (
-              <Link key={index} href={child.href ?? '#'} py={2}>
+              <Link
+                key={index}
+                href={child.href ?? '#'}
+                py={2}
+                textDecoration='none'
+              >
                 {child.label}
               </Link>
             ))}

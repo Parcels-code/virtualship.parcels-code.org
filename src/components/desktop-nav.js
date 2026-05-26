@@ -28,6 +28,7 @@ export const DesktopNav = ({ navItems, ...props }) => {
                 whiteSpace={'nowrap'}
                 flexShrink={0}
                 color={useColorModeValue('gray.600', 'gray.200')}
+                textDecoration='none'
                 _hover={{
                   textDecoration: 'none',
                   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -70,6 +71,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
       display={'block'}
       p={2}
       rounded={'md'}
+      textDecoration='none'
       _hover={{ bg: useColorModeValue('blue.50', 'gray.900') }}
     >
       <Stack direction={'row'} align={'center'}>
