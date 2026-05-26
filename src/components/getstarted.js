@@ -61,7 +61,9 @@ export const GetStarted = () => {
           </Grid>
           {activeIndex !== null && (
             <Box mt={4} width='100%'>
-              <Text fontSize={'lg'}>{getstarted[activeIndex].text}</Text>
+              <Text fontSize={'lg'} whiteSpace='pre-line'>
+                {getstarted[activeIndex].text}
+              </Text>
             </Box>
           )}
         </Box>
