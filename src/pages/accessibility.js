@@ -7,7 +7,7 @@ const Accessibility = () => {
     <Layout
       title={'Accessibility'}
       card={
-        'https://raw.githubusercontent.com/OceanParcels/oceanparcels_website/main/public/virtualship-assets/virtual_ship_logo_no-text.png'
+        'https://github.com/Parcels-code/virtualship.parcels-code.org/blob/main/public/virtualship-assets/logo_no-text.png?raw=true'
       }
       url={`/accessibility`}
     >

@@ -8,7 +8,7 @@ const vspublications = () => {
     <Layout
       title={'VirtualShip publication'}
       card={
-        'https://raw.githubusercontent.com/OceanParcels/virtualship.parcels-code.org/main/public/parcels-assets/logo-no-text.png'
+        'https://github.com/Parcels-code/virtualship.parcels-code.org/blob/main/public/virtualship-assets/logo_no-text.png?raw=true'
       }
       url={`/publications`}
     >

@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OceanParcels/virtualship_website.git"
+    "url": "git+https://github.com/Parcels-code/virtualship.parcels-code.org.git"
   },
   "author": "Parcels Developers & Contributors",
   "license": "Apache 2.0",

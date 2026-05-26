@@ -21,7 +21,7 @@ This project uses a combination of Javascript and Typescript (Javascript - as th
 ### 1. Clone the repository
 
 ```bash
-git clone git@github.com:OceanParcels/virtualship_website.git
+git clone git@github.com:Parcels-code/virtualship.parcels-code.org.git
 ```
 
 ### 2. Install dependencies

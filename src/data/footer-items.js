@@ -2,7 +2,7 @@ export const footerItems = {
   resources: [
     {
       label: 'Brand Assets',
-      href: 'https://github.com/OceanParcels/virtualship_website/tree/main/public/virtualship-assets',
+      href: 'https://github.com/Parcels-code/virtualship.parcels-code.org/tree/main/public/virtualship-assets',
     },
     { label: 'Accessibility', href: '/accessibility' },
     { label: 'Parcels', href: 'https://parcels-code.org' },
@@ -30,11 +30,11 @@ export const footerItems = {
     },
     {
       label: 'GitHub Discussions',
-      href: 'https://github.com/OceanParcels/virtualship/discussions',
+      href: 'https://github.com/Parcels-code/virtualship/discussions',
     },
     {
       label: 'Issue Tracker',
-      href: 'https://github.com/OceanParcels/virtualship/issues',
+      href: 'https://github.com/Parcels-code/virtualship/issues',
     },
   ],
 }

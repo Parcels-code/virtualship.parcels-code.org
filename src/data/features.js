@@ -24,8 +24,8 @@ export const Features = [
     text: 'VirtualShip includes 360 videos for VR headsets to experience life on board a research vessel.',
   },
   {
-    title: 'Built on OceanParcels',
-    text: 'VirtualShip is built on top of OceanParcels, a Python library for simulating particle trajectories.',
+    title: 'Built on Parcels',
+    text: 'VirtualShip is built on top of Parcels, a Python library for simulating particle trajectories.',
   },
   {
     title: 'Free to use and open source',
