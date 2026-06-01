@@ -23,6 +23,16 @@ export const GetStarted = [
   },
   {
     name: 'Researcher',
+    images: [
+      {
+        src: '/getstarted/researcher/running.png',
+        alt: 'Researcher running simulation',
+      },
+      {
+        src: '/getstarted/researcher/VRfigure1.png',
+        alt: 'Researcher VR figure',
+      },
+    ],
     text: `Researchers can design, test, and optimise oceanographic sampling strategies with VirtualShip's flexible Python package before going to sea.
 
     Ocean data is streamed from the Copernicus Marine Data Store. Together with realistic instrument behaviour, this supports both retrospective and near-real-time applications. Researchers can then simulate expeditions anywhere in the global ocean and evaluate different deployment strategies.

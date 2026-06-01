@@ -13,6 +13,12 @@ import {
   Grid,
   GridItem,
   Tooltip,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from '@chakra-ui/react'
 import { ColorModeImage } from '@/components/ColorModeImage'
 import React from 'react'
@@ -23,6 +29,15 @@ import { Heading } from '@/components/mdx'
 export const GetStarted = () => {
   const getstarted = React.useMemo(() => data, [])
   const [activeIndex, setActiveIndex] = React.useState(null)
+  const [previewImageSrc, setPreviewImageSrc] = React.useState(
+    '/getstarted/researcher/running.png',
+  )
+  const [previewImageAlt, setPreviewImageAlt] = React.useState('Image preview')
+  const {
+    isOpen: isImagePreviewOpen,
+    onOpen: openImagePreview,
+    onClose: closeImagePreview,
+  } = useDisclosure()
   const tabSlugs = React.useMemo(
     () =>
       getstarted.map((item) =>
@@ -110,6 +125,18 @@ export const GetStarted = () => {
     return nodes
   }
 
+  const activeItem = activeIndex !== null ? getstarted[activeIndex] : null
+  const hasActiveItemImages =
+    activeItem &&
+    Array.isArray(activeItem.images) &&
+    activeItem.images.length > 0
+
+  const handleImageClick = (src, alt) => {
+    setPreviewImageSrc(src)
+    setPreviewImageAlt(alt || 'Image preview')
+    openImagePreview()
+  }
+
   return (
     <Box id={'getstarted'} as='section'>
       <Container maxW='container.lg' centerContent>
@@ -146,13 +173,72 @@ export const GetStarted = () => {
           </Grid>
           {activeIndex !== null && (
             <Box mt={4} width='100%'>
-              <Text fontSize={'lg'} whiteSpace='pre-line'>
-                {renderTextWithLinks(getstarted[activeIndex].text)}
-              </Text>
+              {hasActiveItemImages ? (
+                <Grid
+                  templateColumns={{ base: '1fr', md: '2fr 1fr' }}
+                  gap={6}
+                  alignItems='start'
+                >
+                  <Text fontSize={'lg'} whiteSpace='pre-line'>
+                    {renderTextWithLinks(getstarted[activeIndex].text)}
+                  </Text>
+                  <Box justifySelf={{ base: 'center', md: 'end' }}>
+                    {activeItem.images.map((image, index) => (
+                      <Image
+                        key={image.src}
+                        src={image.src}
+                        alt={
+                          image.alt || `${activeItem.name} image ${index + 1}`
+                        }
+                        width='100%'
+                        maxW='360px'
+                        borderRadius='md'
+                        cursor='zoom-in'
+                        mt={index === 0 ? 0 : 4}
+                        onClick={() =>
+                          handleImageClick(
+                            image.src,
+                            image.alt ||
+                              `${activeItem.name} image ${index + 1}`,
+                          )
+                        }
+                      />
+                    ))}
+                    <Text
+                      mt={2}
+                      fontSize='sm'
+                      color='gray.500'
+                      textAlign='center'
+                    >
+                      Click images to enlarge
+                    </Text>
+                  </Box>
+                </Grid>
+              ) : (
+                <Text fontSize={'lg'} whiteSpace='pre-line'>
+                  {renderTextWithLinks(getstarted[activeIndex].text)}
+                </Text>
+              )}
             </Box>
           )}
         </Box>
       </Container>
+
+      <Modal isOpen={isImagePreviewOpen} onClose={closeImagePreview} size='4xl'>
+        <ModalOverlay bg='blackAlpha.700' />
+        <ModalContent bg='transparent' boxShadow='none'>
+          <ModalCloseButton color='white' zIndex={2} />
+          <ModalBody p={0} display='flex' justifyContent='center'>
+            <Image
+              src={previewImageSrc}
+              alt={previewImageAlt}
+              maxH='85vh'
+              width='auto'
+              borderRadius='md'
+            />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Box>
   )
 }
