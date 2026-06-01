@@ -1,6 +1,17 @@
 export const GetStarted = [
   {
     name: 'Learner',
+    images: [
+      {
+        src: '/getstarted/learner/software_gif.gif',
+        alt: 'Running the VirtualShip software as a learner',
+      },
+      {
+        src: '/getstarted/learner/Agulhas_plot.png',
+        alt: 'Output of a VirtualShip simulation in the Agulhas Region',
+      },
+    ],
+
     text: `VirtualShip supports students with a realistic framework to experience oceanographic fieldwork within a virtual environment.
 
     The simulated sea-going expeditions allow learners to formulate their own research questions, select cruising routes, and grasp the process of research cruise planning. Just as they would during real-world oceanographic research, students face RLCs (Real-life challenges), instrument deployment, data collection, and scientific interpretation.
@@ -11,6 +22,17 @@ export const GetStarted = [
   },
   {
     name: 'Educator',
+    images: [
+      {
+        src: '/getstarted/educator/CaliforniaUpwelling_plot.png',
+        alt: 'Output of a VirtualShip simulation in the California Upwelling System',
+      },
+      {
+        src: '/getstarted/educator/VRclassroom2.JPG',
+        alt: 'A photo of students using the VR material in the VirtualShip classroom',
+      },
+    ],
+
     text: `VirtualShip provides educators with a modular framework to integrate virtual oceanographic fieldwork into higher education curricula.
 
     The package combines open educational resources, scientific simulation software, and immersive VR material to support teaching activities ranging from introductory BA Marine Science courses to advanced data-driven research projects across a range of disciplines. From a four-hour workshop on fieldwork preparation to a four-week course.
@@ -47,6 +69,16 @@ export const GetStarted = [
   },
   {
     name: 'Developer',
+    images: [
+      {
+        src: '/getstarted/developer/rlc_gif.gif',
+        alt: 'Screencast of a Real-Life Challenge (RLC) in the VirtualShip software',
+      },
+      {
+        src: '/getstarted/developer/VRfigure1.png',
+        alt: 'Screenshot of a VR figure in the VirtualShip software',
+      },
+    ],
     text: `VirtualShip is built as a modular Python framework designed for collaborative development.
 
     The software uses the open-source Parcels Lagrangian simulations and streams analysis-ready ocean data directly from the Copernicus Marine Data Store. Such a pipeline gives the user scalable and realistic virtual expeditions without the need for large local datasets.
