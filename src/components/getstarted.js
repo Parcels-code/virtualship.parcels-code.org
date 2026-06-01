@@ -23,6 +23,59 @@ import { Heading } from '@/components/mdx'
 export const GetStarted = () => {
   const getstarted = React.useMemo(() => data, [])
   const [activeIndex, setActiveIndex] = React.useState(null)
+  const tabSlugs = React.useMemo(
+    () =>
+      getstarted.map((item) =>
+        item.name
+          .toLowerCase()
+          .trim()
+          .replace(/\s+/g, '-')
+          .replace(/[^a-z0-9-]/g, ''),
+      ),
+    [getstarted],
+  )
+
+  React.useEffect(() => {
+    const getTabIndexFromHash = () => {
+      const hash = window.location.hash.replace(/^#/, '').toLowerCase()
+
+      if (!hash) {
+        return null
+      }
+
+      const normalized = hash.startsWith('getstarted-')
+        ? hash.slice('getstarted-'.length)
+        : hash
+
+      const index = tabSlugs.indexOf(normalized)
+      return index >= 0 ? index : null
+    }
+
+    const syncActiveTabFromHash = () => {
+      const indexFromHash = getTabIndexFromHash()
+      if (indexFromHash !== null) {
+        setActiveIndex(indexFromHash)
+      }
+    }
+
+    syncActiveTabFromHash()
+    window.addEventListener('hashchange', syncActiveTabFromHash)
+
+    return () => {
+      window.removeEventListener('hashchange', syncActiveTabFromHash)
+    }
+  }, [tabSlugs])
+
+  const handleTabClick = (index) => {
+    const nextIndex = activeIndex === index ? null : index
+    setActiveIndex(nextIndex)
+
+    if (typeof window !== 'undefined') {
+      const nextHash =
+        nextIndex === null ? 'getstarted' : `getstarted-${tabSlugs[nextIndex]}`
+      window.history.pushState(null, '', `#${nextHash}`)
+    }
+  }
 
   const renderTextWithLinks = (text) => {
     const linkRegex = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g
@@ -82,9 +135,7 @@ export const GetStarted = () => {
                 height='64px'
                 fontSize='2xl'
                 fontWeight='bold'
-                onClick={() =>
-                  setActiveIndex(activeIndex === index ? null : index)
-                }
+                onClick={() => handleTabClick(index)}
                 display='flex'
                 alignItems='center'
                 justifyContent='center'
