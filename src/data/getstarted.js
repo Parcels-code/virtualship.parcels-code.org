@@ -31,6 +31,8 @@ export const GetStarted = [
 
     Current implementations include instruments such as CTDs, ADCPs, Argo floats, and drifters, with several others in development.
 
+    See [here](https://virtualship.readthedocs.io/en/latest/#installation) for installation instructions and the [Quickstart guide](https://virtualship.readthedocs.io/en/latest/user-guide/quickstart.html) for usage guidelines.
+
     Researchers are very much encouraged to contribute workflows, instrument modules, and scientific applications to co-develop the VirtualShip ecosystem as open-source software towards virtual marine fieldwork.`,
   },
   {

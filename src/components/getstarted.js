@@ -23,6 +23,40 @@ import { Heading } from '@/components/mdx'
 export const GetStarted = () => {
   const getstarted = React.useMemo(() => data, [])
   const [activeIndex, setActiveIndex] = React.useState(null)
+
+  const renderTextWithLinks = (text) => {
+    const linkRegex = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g
+    const nodes = []
+    let lastIndex = 0
+    let match
+
+    while ((match = linkRegex.exec(text)) !== null) {
+      if (match.index > lastIndex) {
+        nodes.push(text.slice(lastIndex, match.index))
+      }
+
+      nodes.push(
+        <Link
+          key={`${match[2]}-${match.index}`}
+          href={match[2]}
+          color='blue.500'
+          isExternal
+          textDecoration='underline'
+        >
+          {match[1]}
+        </Link>,
+      )
+
+      lastIndex = linkRegex.lastIndex
+    }
+
+    if (lastIndex < text.length) {
+      nodes.push(text.slice(lastIndex))
+    }
+
+    return nodes
+  }
+
   return (
     <Box id={'getstarted'} as='section'>
       <Container maxW='container.lg' centerContent>
@@ -62,7 +96,7 @@ export const GetStarted = () => {
           {activeIndex !== null && (
             <Box mt={4} width='100%'>
               <Text fontSize={'lg'} whiteSpace='pre-line'>
-                {getstarted[activeIndex].text}
+                {renderTextWithLinks(getstarted[activeIndex].text)}
               </Text>
             </Box>
           )}
