@@ -5,7 +5,7 @@ import { Image, Link } from '@/components/mdx'
 export const HeroBanner = () => {
   return (
     <Box id='header' as='section'>
-      <Container maxW='container.lg' pt={24} centerContent>
+      <Container maxW='container.lg' pt={24} centerContent mb={6}>
         <Stack
           align={'center'}
           spacing={{ base: 8, md: 10 }}

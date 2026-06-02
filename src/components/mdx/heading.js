@@ -1,6 +1,6 @@
 import { Box, Heading as ChakraHeading } from '@chakra-ui/react'
 
-export const Heading = (props) => (
+export const Heading = ({ children, ...props }) => (
   <ChakraHeading
     css={{
       scrollMarginTop: '100px',
@@ -17,12 +17,12 @@ export const Heading = (props) => (
       },
       '&[id]:hover a': { opacity: 1 },
     }}
-    {...props}
     mb='1em'
     mt='2em'
+    {...props}
   >
     <Box pointerEvents='auto'>
-      {props.children}
+      {children}
       {props.id && (
         <Box
           aria-label='anchor'

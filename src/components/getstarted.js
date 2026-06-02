@@ -140,9 +140,9 @@ export const GetStarted = () => {
   const isHtmlFigure = (src) => src?.toLowerCase().endsWith('.html')
 
   return (
-    <Box id={'getstarted'} as='section'>
+    <Box id={'getstarted'} as='section' bg='blue.50' mb={6}>
       <Container maxW='container.lg' centerContent>
-        <Heading as='h1' size='2xl'>
+        <Heading as='h1' size='2xl' mt={6}>
           Get started as
         </Heading>
 
@@ -162,7 +162,7 @@ export const GetStarted = () => {
                 borderRadius='md'
                 width='100%'
                 height='64px'
-                fontSize='2xl'
+                fontSize={{ base: 'lg', sm: 'xl', md: '2xl' }}
                 fontWeight='bold'
                 onClick={() => handleTabClick(index)}
                 display='flex'

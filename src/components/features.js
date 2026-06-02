@@ -18,7 +18,7 @@ export const Features = () => {
   return (
     <Box id={'features'} as='section'>
       <Container maxW='container.lg' pt={0} centerContent>
-        <Heading as='h1' size='2xl'>
+        <Heading as='h1' size='2xl' mt={6}>
           Key Features & Capabilities
         </Heading>
         <Text fontSize={'lg'}>
