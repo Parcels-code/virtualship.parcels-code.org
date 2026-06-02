@@ -9,7 +9,7 @@ export const VideoDemo = () => {
       as='section'
       mt={0}
       mb={0}
-      pb={12}
+      pb={0}
       pt={12}
       bg='#758BFD'
       color='white'
