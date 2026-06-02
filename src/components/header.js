@@ -11,7 +11,6 @@ import {
   Image,
   Stack,
   useColorMode,
-  useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
 import { ColorModeImage } from '@/components/ColorModeImage'
@@ -34,12 +33,10 @@ export const Header = () => {
         boxShadow={'sm'}
         zIndex={'999'}
         justify={'center'}
+        color='black'
         css={{
           backdropFilter: 'saturate(180%) blur(5px)',
-          backgroundColor: useColorModeValue(
-            'rgba(255, 255, 255, 0.8)',
-            'rgba(26, 32, 44, 0.8)',
-          ),
+          backgroundColor: '#FFCD00',
         }}
       >
         <Container as={Flex} maxW={'container.lg'} align={'center'}>
@@ -60,6 +57,7 @@ export const Header = () => {
               }
               variant={'ghost'}
               size={'sm'}
+              color='black'
               aria-label={'Toggle Navigation'}
             />
           </Flex>
@@ -101,6 +99,7 @@ export const Header = () => {
               onClick={toggleColorMode}
               variant={'ghost'}
               size={'sm'}
+              color='black'
             />
           </Stack>
         </Container>

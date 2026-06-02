@@ -34,11 +34,7 @@ const MobileNavItem = ({ href, children, label }) => {
           textDecoration: 'none',
         }}
       >
-        <Text
-          fontWeight={600}
-          whiteSpace={'nowrap'}
-          color={useColorModeValue('gray.600', 'gray.200')}
-        >
+        <Text fontWeight={600} whiteSpace={'nowrap'} color='black'>
           {label}
         </Text>
         {children && (
@@ -69,6 +65,7 @@ const MobileNavItem = ({ href, children, label }) => {
                 key={index}
                 href={child.href ?? '#'}
                 py={2}
+                color='black'
                 textDecoration='none'
               >
                 {child.label}

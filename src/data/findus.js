@@ -7,13 +7,13 @@ export const FindUs = [
   },
   {
     name: 'GitHub',
-    logo_light: '/projects/GitHub_Lockup_Black.png',
+    logo_light: '/projects/GitHub_Lockup_White.png',
     logo_dark: '/projects/GitHub_Lockup_White.png',
     url: 'https://github.com/Parcels-code/virtualship',
   },
   {
     name: 'YouTube',
-    logo_light: '/projects/yt_logo_fullcolor_almostblack_digital.png',
+    logo_light: '/projects/yt_logo_fullcolor_white_digital.png',
     logo_dark: '/projects/yt_logo_fullcolor_white_digital.png',
     url: 'https://www.youtube.com/@VirtualShipClassroom',
   },

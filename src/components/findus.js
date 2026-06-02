@@ -17,12 +17,8 @@ import { Heading } from '@/components/mdx'
 export const FindUs = () => {
   const findus = React.useMemo(() => data, [])
   return (
-    <Box id={'findus'} as='section'>
-      <Container maxW='container.lg' py={0} centerContent>
-        <Heading as='h1' size='2xl'>
-          Find us on
-        </Heading>
-
+    <Box id={'findus'} as='section' bg='#758BFD' color='white'>
+      <Container maxW='container.lg' mt={0} mb={0} pt={6} centerContent>
         <Box my={8}>
           <Grid
             templateColumns={`repeat(${findus.length}, minmax(auto, max-content))`}

@@ -27,12 +27,11 @@ export const DesktopNav = ({ navItems, ...props }) => {
                 // eslint-disable-next-line react-hooks/rules-of-hooks
                 whiteSpace={'nowrap'}
                 flexShrink={0}
-                color={useColorModeValue('gray.600', 'gray.200')}
+                color='black'
                 textDecoration='none'
                 _hover={{
                   textDecoration: 'none',
-                  // eslint-disable-next-line react-hooks/rules-of-hooks
-                  color: useColorModeValue('gray.800', 'white'),
+                  color: 'black',
                 }}
               >
                 {navItem.label}

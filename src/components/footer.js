@@ -48,11 +48,7 @@ const ListHeader = ({ children }) => {
 
 export const Footer = () => {
   return (
-    <Box
-      bg={useColorModeValue('gray.50', 'gray.900')}
-      color={useColorModeValue('gray.700', 'gray.200')}
-      as='footer'
-    >
+    <Box bg='#FFCD00' color='black' as='footer'>
       <Container maxW='container.lg' my={8} centerContent>
         <SimpleGrid
           columns={{ base: 1, sm: 2, md: 3 }}
@@ -82,8 +78,9 @@ export const Footer = () => {
                   key={item.label}
                   href={item.href}
                   fontSize={'sm'}
+                  color='black'
                   textDecoration='none'
-                  _hover={{ color: 'blue.500', textDecoration: 'none' }}
+                  _hover={{ color: 'black', textDecoration: 'none' }}
                 >
                   {item.label}
                 </Link>
@@ -98,8 +95,9 @@ export const Footer = () => {
                   key={item.label}
                   href={item.href}
                   fontSize={'sm'}
+                  color='black'
                   textDecoration='none'
-                  _hover={{ color: 'blue.500', textDecoration: 'none' }}
+                  _hover={{ color: 'black', textDecoration: 'none' }}
                 >
                   {item.label}
                 </Link>

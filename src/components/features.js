@@ -16,8 +16,8 @@ import { CheckIcon } from '@chakra-ui/icons'
 export const Features = () => {
   const features = React.useMemo(() => data, [])
   return (
-    <Box id={'features'} as='section'>
-      <Container maxW='container.lg' pt={0} centerContent>
+    <Box id={'features'} as='section' bg='white' color='black'>
+      <Container maxW='container.lg' pt={6} centerContent>
         <Heading as='h1' size='2xl' mt={6}>
           Key Features & Capabilities
         </Heading>

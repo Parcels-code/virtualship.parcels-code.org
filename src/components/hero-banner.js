@@ -4,8 +4,8 @@ import { Image, Link } from '@/components/mdx'
 
 export const HeroBanner = () => {
   return (
-    <Box id='header' as='section'>
-      <Container maxW='container.lg' pt={24} centerContent mb={6}>
+    <Box id='header' as='section' bg='#FFFFFF'>
+      <Container maxW='container.lg' pt={24} centerContent mb={0} pb={12}>
         <Stack
           align={'center'}
           spacing={{ base: 8, md: 10 }}
@@ -34,7 +34,7 @@ export const HeroBanner = () => {
                 VirtualShip
               </Text>
               <br />
-              <Text as={'span'} color={'blue.400'}>
+              <Text as={'span'} color={'#758BFD'}>
                 Explore the ocean with a virtual research vessel
               </Text>
             </Heading>

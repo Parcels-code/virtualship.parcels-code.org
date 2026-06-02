@@ -143,9 +143,11 @@ export const GetStarted = () => {
     <Box
       id={'getstarted'}
       as='section'
-      bg='blue.50'
+      bg='#AEB8FE'
       _dark={{ bg: 'blue.900' }}
-      mb={6}
+      mb={0}
+      pt={6}
+      pb={12}
     >
       <Container maxW='container.lg' centerContent>
         <Heading as='h1' size='2xl' mt={6}>
@@ -162,9 +164,9 @@ export const GetStarted = () => {
             {getstarted.map((item, index) => (
               <Button
                 key={index}
-                bg='blue.400'
+                bg='#27187E'
                 color='white'
-                _hover={{ bg: 'blue.700' }}
+                _hover={{ bg: '#27187E' }}
                 borderRadius='md'
                 width='100%'
                 height='64px'

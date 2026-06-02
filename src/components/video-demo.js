@@ -4,7 +4,16 @@ import React from 'react'
 
 export const VideoDemo = () => {
   return (
-    <Box id={'video-demo'} as='section' my={12}>
+    <Box
+      id={'video-demo'}
+      as='section'
+      mt={0}
+      mb={0}
+      pb={12}
+      pt={12}
+      bg='#758BFD'
+      color='white'
+    >
       <Container maxW='container.lg' pt={0} centerContent>
         <Box
           w='100%'
