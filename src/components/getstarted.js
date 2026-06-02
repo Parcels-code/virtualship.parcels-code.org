@@ -137,6 +137,8 @@ export const GetStarted = () => {
     openImagePreview()
   }
 
+  const isHtmlFigure = (src) => src?.toLowerCase().endsWith('.html')
+
   return (
     <Box id={'getstarted'} as='section'>
       <Container maxW='container.lg' centerContent>
@@ -183,34 +185,66 @@ export const GetStarted = () => {
                     {renderTextWithLinks(getstarted[activeIndex].text)}
                   </Text>
                   <Box justifySelf={{ base: 'center', md: 'end' }}>
-                    {activeItem.images.map((image, index) => (
-                      <Image
-                        key={image.src}
-                        src={image.src}
-                        alt={
-                          image.alt || `${activeItem.name} image ${index + 1}`
-                        }
-                        width='100%'
-                        maxW='360px'
-                        borderRadius='md'
-                        cursor='zoom-in'
-                        mt={index === 0 ? 0 : 4}
-                        onClick={() =>
-                          handleImageClick(
-                            image.src,
-                            image.alt ||
-                              `${activeItem.name} image ${index + 1}`,
-                          )
-                        }
-                      />
-                    ))}
+                    {activeItem.images.map((image, index) => {
+                      const inlineSrc = image.src
+                      const modalSrc = image.modalSrc || image.src
+                      const altText =
+                        image.alt || `${activeItem.name} image ${index + 1}`
+
+                      if (isHtmlFigure(inlineSrc)) {
+                        return (
+                          <Box
+                            key={`${inlineSrc}-${index}`}
+                            mt={index === 0 ? 0 : 4}
+                          >
+                            <Box
+                              as='iframe'
+                              src={inlineSrc}
+                              title={altText}
+                              width='100%'
+                              maxW='360px'
+                              height='260px'
+                              border='1px solid'
+                              borderColor='gray.200'
+                              borderRadius='md'
+                              bg='white'
+                            />
+                            <Button
+                              mt={2}
+                              size='sm'
+                              width='100%'
+                              maxW='360px'
+                              onClick={() =>
+                                handleImageClick(modalSrc, altText)
+                              }
+                            >
+                              Open larger view
+                            </Button>
+                          </Box>
+                        )
+                      }
+
+                      return (
+                        <Image
+                          key={`${inlineSrc}-${index}`}
+                          src={inlineSrc}
+                          alt={altText}
+                          width='100%'
+                          maxW='360px'
+                          borderRadius='md'
+                          cursor='pointer'
+                          mt={index === 0 ? 0 : 4}
+                          onClick={() => handleImageClick(modalSrc, altText)}
+                        />
+                      )
+                    })}
                     <Text
                       mt={2}
                       fontSize='sm'
                       color='gray.500'
                       textAlign='center'
                     >
-                      Click images to enlarge
+                      Click figures to open a larger view.
                     </Text>
                   </Box>
                 </Grid>
@@ -229,13 +263,26 @@ export const GetStarted = () => {
         <ModalContent bg='transparent' boxShadow='none'>
           <ModalCloseButton color='white' zIndex={2} />
           <ModalBody p={0} display='flex' justifyContent='center'>
-            <Image
-              src={previewImageSrc}
-              alt={previewImageAlt}
-              maxH='85vh'
-              width='auto'
-              borderRadius='md'
-            />
+            {isHtmlFigure(previewImageSrc) ? (
+              <Box
+                as='iframe'
+                src={previewImageSrc}
+                title={previewImageAlt}
+                width='100%'
+                height='80vh'
+                border='none'
+                borderRadius='md'
+                bg='white'
+              />
+            ) : (
+              <Image
+                src={previewImageSrc}
+                alt={previewImageAlt}
+                maxH='85vh'
+                width='auto'
+                borderRadius='md'
+              />
+            )}
           </ModalBody>
         </ModalContent>
       </Modal>

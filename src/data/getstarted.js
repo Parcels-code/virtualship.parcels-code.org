@@ -35,9 +35,9 @@ export const GetStarted = [
 
     text: `VirtualShip provides educators with a modular framework to integrate virtual oceanographic fieldwork into higher education curricula.
 
-    The package combines open educational resources, scientific simulation software, and immersive VR material to support teaching activities ranging from introductory BA Marine Science courses to advanced data-driven research projects across a range of disciplines. From a four-hour workshop on fieldwork preparation to a four-week course.
+    The package combines open educational resources, scientific simulation software, and immersive VR material to support teaching activities ranging from introductory BSc Marine Science courses to advanced data-driven research projects across a range of disciplines. From a four-hour workshop on fieldwork preparation to a four-week course.
 
-    The VirtualShip Classroom has already been implemented successfully across eight BA and MSc-level course cycles at Utrecht University and is designed to be adaptable for use beyond Utrecht.
+    The VirtualShip Classroom has already been implemented successfully across eight BSc and MSc-level course cycles at Utrecht University and is designed to be adaptable for use beyond Utrecht.
 
     Lesson plans, tutorials, and assignments allow instructors to alternately emphasise proposal writing, fieldwork planning, virtual deployments, or data analysis depending on course and cohort objectives.
 
@@ -49,6 +49,11 @@ export const GetStarted = [
       {
         src: '/getstarted/researcher/running.png',
         alt: 'Researcher running simulation',
+      },
+      {
+        src: '/getstarted/researcher/argo_screenshot.png',
+        modalSrc: '/getstarted/researcher/argo_interactive_plot.html',
+        alt: 'Interactive Argo profile figure',
       },
       {
         src: '/getstarted/researcher/VRfigure1.png',
@@ -85,7 +90,7 @@ export const GetStarted = [
 
     Developers can prototype new workflows due to the implementation of instruments' behaviour via customisable simulation kernels.
 
-    The project invites contributions from programmers, oceanographers, marine scientists at large, those who work with scientific visualisation, Open Science practitioners, and educational experts.
+    The project invites contributions from [programmers](https://virtualship.readthedocs.io/en/latest/contributing/index.html), oceanographers, marine scientists at large, those who work with scientific visualisation, Open Science practitioners, and educational experts.
 
     New instrument types, biological or meteorological integrations, visualisation tools, teaching applications, amongst others, can all be incorporated into VirtualShip.`,
   },
