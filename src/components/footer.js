@@ -40,7 +40,7 @@ const SocialButton = ({ children, label, href }) => {
 
 const ListHeader = ({ children }) => {
   return (
-    <Text fontWeight={'bold'} my={2}>
+    <Text fontWeight={'bold'} mb={2}>
       {children}
     </Text>
   )

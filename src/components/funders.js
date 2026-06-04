@@ -20,9 +20,9 @@ export const Funders = () => {
     <Box id={'funders'} as='section' bg='#27187E' color='white'>
       <Container maxW='container.lg' centerContent>
         <Box my={8}>
-          <Text fontSize={'lg'}>
+          <Text fontSize={'lg'} textAlign='center'>
             VirtualShip development has been supported by the following
-            organisations:
+            organisations
           </Text>
 
           <Grid
