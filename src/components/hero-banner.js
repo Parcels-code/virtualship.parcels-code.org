@@ -30,6 +30,7 @@ export const HeroBanner = () => {
                   left: 0,
                   zIndex: -1,
                 }}
+                color={'#27187E'}
               >
                 VirtualShip
               </Text>
