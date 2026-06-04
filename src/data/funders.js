@@ -7,8 +7,8 @@ export const Funders = [
   },
   {
     name: 'NIOZ',
-    logo_light: '/funders-logos/NIOZlogo-dark.png',
-    logo_dark: '/funders-logos/NIOZlogo.png',
+    logo_light: '/funders-logos/NIOZ_logo_ENG_RGB_white.png',
+    logo_dark: '/funders-logos/NIO_logo_ENG_RGB_white.png',
     url: 'https://www.nioz.nl/en',
   },
   {
