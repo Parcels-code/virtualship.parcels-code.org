@@ -1,15 +1,7 @@
 import { Link } from '@/components/mdx'
 import { Box, Card, CardBody, Stack, Text } from '@chakra-ui/react'
-import { ColorModeImage } from '@/components/ColorModeImage'
 
-export const ProjectCard = ({
-  name,
-  description,
-  repo,
-  homepage,
-  logo_light,
-  logo_dark,
-}) => {
+export const ProjectCard = ({ name, description, repo, homepage, logo }) => {
   return (
     <Card
       as={Link}
@@ -20,7 +12,6 @@ export const ProjectCard = ({
       transitionDuration='slower'
       transitionTimingFunction='ease-out'
       bg='gray.50'
-      _dark={{ bg: 'gray.700' }}
       _hover={{
         transform: 'scale(1.025)',
         boxShadow: 'md',
@@ -35,11 +26,10 @@ export const ProjectCard = ({
           gap={0}
         >
           <Box>
-            <ColorModeImage
+            <Image
               h={'128'}
               w={'full'}
-              lightSrc={logo_light}
-              darkSrc={logo_dark}
+              src={logo}
               alt={name}
               layout='fill'
               objectFit='contain'

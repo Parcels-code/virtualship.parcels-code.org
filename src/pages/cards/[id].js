@@ -12,7 +12,6 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { ColorModeImage } from '@/components/ColorModeImage'
 import fs from 'fs'
 import matter from 'gray-matter'
 import path from 'path'
@@ -29,12 +28,11 @@ const Card = ({ frontmatter, id }) => {
             <Text fontSize='xl' color='gray.700' fontWeight='medium'>
               Parcels / blog
             </Text>
-            <ColorModeImage
+            <Image
               w='150px'
               h='auto'
               objectFit='contain'
-              lightSrc='/virtualship-assets/logo_no-text.png'
-              darkSrc='/virtualship-assets/logo_no-text_dia.png'
+              src='/virtualship-assets/logo_no-text.png'
               alt='Parcels logo'
             />
           </Flex>

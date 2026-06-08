@@ -30,8 +30,7 @@ export const Projects = () => {
               <ProjectCard
                 key={index}
                 name={project.name}
-                logo_light={project.logo_light}
-                logo_dark={project.logo_dark}
+                logo={project.logo}
                 description={project.description}
                 repo={project.repo}
                 homepage={project.homepage}

@@ -1,17 +1,11 @@
-import { Alert, useColorMode } from '@chakra-ui/react'
+import { Alert } from '@chakra-ui/react'
 
 export const Quote = (props) => {
-  const { colorMode } = useColorMode()
-  const bgColor = {
-    light: 'blue.50',
-    dark: 'blue.900',
-  }
-
   return (
     <Alert
       mt={4}
       w='98%'
-      bg={bgColor[colorMode]}
+      bg={'blue.50'}
       variant='left-accent'
       status='info'
       css={{

@@ -1,20 +1,17 @@
 export const Funders = [
   {
     name: 'Utrecht University',
-    logo_light: '/funders-logos/UUlogo_dia.png',
-    logo_dark: '/funders-logos/UUlogo_dia.png',
+    logo: '/funders-logos/UUlogo_dia.png',
     url: 'https://www.uu.nl/en',
   },
   {
     name: 'NIOZ',
-    logo_light: '/funders-logos/NIOZ_logo_ENG_RGB_white.png',
-    logo_dark: '/funders-logos/NIO_logo_ENG_RGB_white.png',
+    logo: '/funders-logos/NIOZ_logo_ENG_RGB_white.png',
     url: 'https://www.nioz.nl/en',
   },
   {
     name: 'Nationaal Kennisinstituut Onderwijs',
-    logo_light: '/funders-logos/NKOlogo-dark.png',
-    logo_dark: '/funders-logos/NKOlogo.png',
+    logo: '/funders-logos/NKOlogo-dark.png',
     url: 'https://www.nko.nl/en',
   },
 ]

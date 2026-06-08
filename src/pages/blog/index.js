@@ -9,9 +9,7 @@ import {
   Stack,
   StackDivider,
   Text,
-  useColorModeValue,
   VStack,
-  useColorMode,
 } from '@chakra-ui/react'
 
 import { motion } from 'framer-motion'
@@ -42,13 +40,7 @@ const SinglePost = ({ page }) => {
             {page.title}
           </Link>
 
-          <Text
-            fontSize={'sm'}
-            color={
-              useColorMode().colorMode === 'dark' ? 'gray.300' : 'gray.600'
-            }
-            py={4}
-          >
+          <Text fontSize={'sm'} color={'gray.600'} py={4}>
             {formatDate(date)} ({distanceToNow(date)})
           </Text>
 
@@ -89,11 +81,7 @@ export default function Blog({ allPostsData }) {
           <Heading as='h1' size='2xl' textAlign={'center'} my={4}>
             Blog
           </Heading>
-          <Text
-            color={useColorModeValue('gray.800', 'white')}
-            fontSize={'lg'}
-            textAlign={'center'}
-          >
+          <Text color={'gray.800'} fontSize={'lg'} textAlign={'center'}>
             Announcements and news from the VirtualShip team.
           </Text>
 

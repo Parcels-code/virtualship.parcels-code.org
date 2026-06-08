@@ -10,17 +10,14 @@ import {
   IconButton,
   Image,
   Stack,
-  useColorMode,
   useDisclosure,
 } from '@chakra-ui/react'
-import { ColorModeImage } from '@/components/ColorModeImage'
 import React from 'react'
 
 export const Header = () => {
   const navItems = React.useMemo(() => menuItems, [])
 
   const { isOpen, onToggle } = useDisclosure()
-  const { colorMode, toggleColorMode } = useColorMode()
 
   return (
     <Box>
@@ -73,10 +70,9 @@ export const Header = () => {
               alignItems={'center'}
               spacing={{ base: 2, sm: 4 }}
             >
-              <ColorModeImage
+              <Image
                 w={48}
-                lightSrc={'/virtualship-assets/logo-horo.png'}
-                darkSrc={'/virtualship-assets/logo-horo_dia.png'}
+                src={'/virtualship-assets/logo-horo.png'}
                 alt={'VirtualShip logo'}
               />
             </Stack>
@@ -92,14 +88,6 @@ export const Header = () => {
             <DesktopNav
               navItems={navItems}
               display={{ base: 'none', md: 'flex' }}
-            />
-            <IconButton
-              aria-label={`Switch to ${colorMode === 'light' ? 'dark' : 'light'} mode`}
-              icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-              onClick={toggleColorMode}
-              variant={'ghost'}
-              size={'sm'}
-              color='black'
             />
           </Stack>
         </Container>

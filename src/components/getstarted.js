@@ -20,7 +20,6 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from '@chakra-ui/react'
-import { ColorModeImage } from '@/components/ColorModeImage'
 import React from 'react'
 import { GetStarted as data } from '@/data/getstarted'
 
@@ -140,15 +139,7 @@ export const GetStarted = () => {
   const isHtmlFigure = (src) => src?.toLowerCase().endsWith('.html')
 
   return (
-    <Box
-      id={'getstarted'}
-      as='section'
-      bg='#AEB8FE'
-      _dark={{ bg: 'blue.900' }}
-      mb={0}
-      pt={6}
-      pb={12}
-    >
+    <Box id={'getstarted'} as='section' bg='#AEB8FE' mb={0} pt={6} pb={12}>
       <Container maxW='container.lg' centerContent>
         <Heading as='h1' size='2xl' mt={6}>
           Get started as

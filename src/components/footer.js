@@ -5,19 +5,17 @@ import {
   SimpleGrid,
   Stack,
   Text,
-  useColorModeValue,
   VisuallyHidden,
   VStack,
 } from '@chakra-ui/react'
 
-import { ColorModeImage } from '@/components/ColorModeImage'
 import { Image, Link } from '@/components/mdx'
 import { footerItems } from '@/data/footer-items'
 
 const SocialButton = ({ children, label, href }) => {
   return (
     <Button
-      bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
+      bg='blackAlpha.100'
       rounded={'full'}
       w={12}
       h={12}
@@ -29,7 +27,7 @@ const SocialButton = ({ children, label, href }) => {
       justifyContent={'center'}
       transition={'background 0.3s ease'}
       _hover={{
-        bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
+        bg: 'blackAlpha.200',
       }}
     >
       <VisuallyHidden>{label}</VisuallyHidden>
@@ -56,10 +54,9 @@ export const Footer = () => {
         >
           <Stack spacing={6}>
             <Box>
-              <ColorModeImage
+              <Image
                 w={32}
-                lightSrc={'/virtualship-assets/logo-horo.png'}
-                darkSrc={'/virtualship-assets/logo-horo_dia.png'}
+                src={'/virtualship-assets/logo-horo.png'}
                 alt={'parcels logo'}
               />
             </Box>
