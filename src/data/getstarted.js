@@ -14,9 +14,9 @@ export const GetStarted = [
 
     text: `VirtualShip supports students with a realistic framework to experience oceanographic fieldwork within a virtual environment.
 
-    The simulated sea-going expeditions allow learners to formulate their own research questions, select cruising routes, and grasp the process of research cruise planning. Just as they would during real-world oceanographic research, students face RLCs (Real-life challenges), instrument deployment, data collection, and scientific interpretation.
+    The simulated sea-going expeditions allow learners to formulate their own research questions, select cruising routes, and grasp the process of research cruise planning. Just as they would during real-world oceanographic research, students face RLCs ([Real-life challenges](/getstarted/learner/software_gif.gif)), instrument deployment, data collection, and scientific interpretation.
 
-    The resulting numerical ocean simulations can be combined with VirtualShip's immersive 360° videos and VR material.
+    The resulting numerical ocean simulations can be combined with VirtualShip's [immersive 360° videos and VR material](https://www.youtube.com/@VirtualShipClassroom).
 
     Using all components of the VirtualShip package qualifies students with conceptual understanding alongside practical awareness of the operational constraints and methodological decisions involved in marine research.`,
   },

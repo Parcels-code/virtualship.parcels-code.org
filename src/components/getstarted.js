@@ -1,9 +1,4 @@
 import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
   Box,
   Button,
   Container,
@@ -11,8 +6,6 @@ import {
   Text,
   Link,
   Grid,
-  GridItem,
-  Tooltip,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -92,7 +85,7 @@ export const GetStarted = () => {
   }
 
   const renderTextWithLinks = (text) => {
-    const linkRegex = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g
+    const linkRegex = /\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]+)\)/g
     const nodes = []
     let lastIndex = 0
     let match
@@ -102,15 +95,27 @@ export const GetStarted = () => {
         nodes.push(text.slice(lastIndex, match.index))
       }
 
+      const linkLabel = match[1]
+      const href = match[2]
+      const isExternalLink = /^https?:\/\//i.test(href)
+
       nodes.push(
         <Link
-          key={`${match[2]}-${match.index}`}
-          href={match[2]}
-          color='blue.500'
-          isExternal
+          key={`${href}-${match.index}`}
+          href={href}
+          color='blue.700'
+          isExternal={isExternalLink}
           textDecoration='underline'
+          onClick={
+            isExternalLink
+              ? undefined
+              : (event) => {
+                  event.preventDefault()
+                  handleImageClick(href, linkLabel)
+                }
+          }
         >
-          {match[1]}
+          {linkLabel}
         </Link>,
       )
 
@@ -141,9 +146,12 @@ export const GetStarted = () => {
   return (
     <Box id={'getstarted'} as='section' bg='#AEB8FE' mb={0} pt={6} pb={12}>
       <Container maxW='container.lg' centerContent>
-        <Heading as='h1' size='2xl' mt={6}>
+        <Heading as='h1' size='2xl' mt={6} mb={1}>
           Get started as
         </Heading>
+        <Text mt={0} mb={6} fontSize='sm' color='gray.800' textAlign='center'>
+          [click buttons below to expand sections]
+        </Text>
 
         <Box my={0} width='100%'>
           <Grid
@@ -240,10 +248,10 @@ export const GetStarted = () => {
                     <Text
                       mt={2}
                       fontSize='sm'
-                      color='gray.500'
+                      color='gray.800'
                       textAlign='center'
                     >
-                      Click figures to open a larger view.
+                      [click figures above to open a larger view]
                     </Text>
                   </Box>
                 </Grid>
