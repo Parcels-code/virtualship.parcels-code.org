@@ -44,7 +44,7 @@ export const VideoDemo = () => {
               aria-label='Play VirtualShip Classroom Demonstration video'
             >
               <Image
-                src='/video-thumbnails/virtualship-demo.jpg'
+                src='/video-thumbnails/quickstartguide1.png'
                 alt='Preview frame for VirtualShip Classroom Demonstration'
                 w='100%'
                 h='100%'
@@ -59,15 +59,20 @@ export const VideoDemo = () => {
                 bg='blackAlpha.700'
                 color='white'
                 borderRadius='full'
-                w='64px'
-                h='64px'
+                px={6}
+                py={3}
                 display='flex'
                 alignItems='center'
                 justifyContent='center'
-                fontSize='2xl'
+                gap={4}
+                fontSize='md'
+                fontWeight='semibold'
                 lineHeight='1'
               >
-                ▶
+                <Box as='span' aria-hidden='true'>
+                  ▶
+                </Box>
+                <Box as='span'>Play Quickstart video</Box>
               </Box>
             </Box>
           )}
