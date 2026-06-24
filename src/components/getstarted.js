@@ -163,15 +163,18 @@ export const GetStarted = () => {
             {getstarted.map((item, index) => (
               <Button
                 key={index}
-                bg='#27187E'
-                color='white'
-                _hover={{ bg: '#27187E' }}
+                bg={activeIndex === index ? '#FFCD00' : '#27187E'}
+                color={activeIndex === index ? 'black' : 'white'}
+                _hover={{ bg: activeIndex === index ? '#E6B800' : '#21156D' }}
+                _active={{ bg: activeIndex === index ? '#CC9F00' : '#1C135B' }}
                 borderRadius='md'
                 width='100%'
                 height='64px'
                 fontSize={{ base: 'lg', sm: 'xl', md: '2xl' }}
                 fontWeight='bold'
                 onClick={() => handleTabClick(index)}
+                aria-pressed={activeIndex === index}
+                transition='background-color 0.2s ease'
                 display='flex'
                 alignItems='center'
                 justifyContent='center'
