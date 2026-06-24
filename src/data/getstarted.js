@@ -18,7 +18,9 @@ export const GetStarted = [
 
     The resulting numerical ocean simulations can be combined with VirtualShip's [immersive 360° videos and VR material](https://www.youtube.com/@VirtualShipClassroom).
 
-    Using all components of the VirtualShip package qualifies students with conceptual understanding alongside practical awareness of the operational constraints and methodological decisions involved in marine research.`,
+    Using all components of the VirtualShip package qualifies students with conceptual understanding alongside practical awareness of the operational constraints and methodological decisions involved in marine research.
+
+    Get started by preparing your own [expedition plan](https://virtualship.readthedocs.io/en/latest/user-guide/assignments/Research_Proposal_only.html) and then continue to [install](https://virtualship.readthedocs.io/en/latest/#installation) and [run](https://virtualship.readthedocs.io/en/latest/user-guide/quickstart.html) VirtualShip.`,
   },
   {
     name: 'Educator',
@@ -37,9 +39,9 @@ export const GetStarted = [
 
     The package combines open educational resources, scientific simulation software, and immersive VR material to support teaching activities ranging from introductory BSc Marine Science courses to advanced data-driven research projects across a range of disciplines. From a four-hour workshop on fieldwork preparation to a four-week course.
 
-    The VirtualShip Classroom has already been implemented successfully across eight BSc and MSc-level course cycles at Utrecht University and is designed to be adaptable for use beyond Utrecht.
+    The [VirtualShip Classroom](https://virtualship.readthedocs.io/en/latest/user-guide/teacher-content/index.html) has already been implemented successfully across eight BSc and MSc-level course cycles at Utrecht University and is designed to be adaptable for use beyond Utrecht.
 
-    Lesson plans, tutorials, and assignments allow instructors to alternately emphasise proposal writing, fieldwork planning, virtual deployments, or data analysis depending on course and cohort objectives.
+    [Lesson plans](https://edusources.nl/materials/76082735-37b6-4ef2-b782-6903f09b4b1a/virtual-sea-going-marine-science-fieldwork-with-virtualship), [tutorials](https://virtualship.readthedocs.io/en/latest/user-guide/tutorials/index.html), and [assignments](https://virtualship.readthedocs.io/en/latest/user-guide/assignments/index.html) allow instructors to alternately emphasise proposal writing, fieldwork planning, virtual deployments, or data analysis depending on course and cohort objectives.
 
     If you are implementing VirtualShip or will be doing so in the future, we would be delighted to welcome your contributions, be they in the form of feedback, student output, rubrics or others!`,
   },
@@ -66,11 +68,11 @@ export const GetStarted = [
 
     This creates new opportunities for expedition planning, Observation System Simulation Experiments (OSSEs), and more adaptive sampling prospects while reducing costs, logistical hurdles, and the environmental impacts associated with ship time.
 
-    Current implementations include instruments such as CTDs, ADCPs, Argo floats, and drifters, with several others in development.
+    [Current implementations](https://virtualship.readthedocs.io/en/latest/user-guide/documentation/full_sensor_list.html) include instruments such as CTDs, ADCPs, Argo floats, and drifters, with several others in development.
 
     See [here](https://virtualship.readthedocs.io/en/latest/#installation) for installation instructions and the [Quickstart guide](https://virtualship.readthedocs.io/en/latest/user-guide/quickstart.html) for usage guidelines.
 
-    Researchers are very much encouraged to contribute workflows, instrument modules, and scientific applications to co-develop the VirtualShip ecosystem as open-source software towards virtual marine fieldwork.`,
+    Researchers are very much encouraged to [contribute](https://virtualship.readthedocs.io/en/latest/contributing/index.html) workflows, instrument modules, and scientific applications to co-develop the VirtualShip ecosystem as open-source software towards virtual marine fieldwork.`,
   },
   {
     name: 'Developer',
