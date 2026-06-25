@@ -43,7 +43,7 @@ export const GetStarted = [
 
     [Lesson plans](https://edusources.nl/materials/76082735-37b6-4ef2-b782-6903f09b4b1a/virtual-sea-going-marine-science-fieldwork-with-virtualship), [tutorials](https://virtualship.readthedocs.io/en/latest/user-guide/tutorials/index.html), and [assignments](https://virtualship.readthedocs.io/en/latest/user-guide/assignments/index.html) allow instructors to alternately emphasise proposal writing, fieldwork planning, virtual deployments, or data analysis depending on course and cohort objectives.
 
-    If you are implementing VirtualShip or will be doing so in the future, we would be delighted to welcome your contributions, be they in the form of feedback, student output, rubrics or others!`,
+    If you are implementing VirtualShip or will be doing so in the future, we would be delighted to welcome your contributions (either directly on [GitHub](https://virtualship.readthedocs.io/en/latest/contributing/index.html) or through [edusources](https://edusources.nl/)). They can be in the form of feedback, student output, rubrics or others!`,
   },
   {
     name: 'Researcher',
@@ -92,7 +92,7 @@ export const GetStarted = [
 
     Developers can prototype new workflows due to the implementation of instruments' behaviour via customisable simulation kernels.
 
-    The project invites contributions from [programmers](https://virtualship.readthedocs.io/en/latest/contributing/index.html), oceanographers, marine scientists at large, those who work with scientific visualisation, Open Science practitioners, and educational experts.
+    The project [invites contributions](https://virtualship.readthedocs.io/en/latest/contributing/index.html) from programmers, oceanographers, marine scientists at large, those who work with scientific visualisation, Open Science practitioners, and educational experts. You can also get in touch via email (virtualship@uu.nl)!
 
     New instrument types, biological or meteorological integrations, visualisation tools, teaching applications, amongst others, can all be incorporated into VirtualShip.`,
   },
