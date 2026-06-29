@@ -3,6 +3,7 @@ import { Heading } from '@/components/mdx/heading'
 import { Hr } from '@/components/mdx/hr'
 import { Image } from '@/components/mdx/image'
 import { Link } from '@/components/mdx/link'
+import { Panorama } from '@/components/mdx/panorama'
 import { Quote } from '@/components/mdx/quote'
 import { Box, Text } from '@chakra-ui/react'
 
@@ -23,4 +24,5 @@ export const mapping = {
   li: (props) => <Box as='li' pb={1} {...props} />,
   blockquote: (props) => <Quote {...props} />,
   img: (props) => <Image {...props} alt={props.alt} />,
+  Panorama: (props) => <Panorama {...props} />,
 }
