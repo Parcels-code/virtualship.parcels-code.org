@@ -17,6 +17,7 @@ import React from 'react'
 import { GetStarted as data } from '@/data/getstarted'
 
 import { Heading } from '@/components/mdx'
+import { Panorama } from '@/components/mdx/panorama'
 
 export const GetStarted = () => {
   const getstarted = React.useMemo(() => data, [])
@@ -25,6 +26,7 @@ export const GetStarted = () => {
     '/getstarted/researcher/running.png',
   )
   const [previewImageAlt, setPreviewImageAlt] = React.useState('Image preview')
+  const [previewImageType, setPreviewImageType] = React.useState('image')
   const {
     isOpen: isImagePreviewOpen,
     onOpen: openImagePreview,
@@ -111,7 +113,11 @@ export const GetStarted = () => {
               ? undefined
               : (event) => {
                   event.preventDefault()
-                  handleImageClick(href, linkLabel)
+                  handleImageClick(
+                    href,
+                    linkLabel,
+                    isHtmlFigure(href) ? 'html' : 'image',
+                  )
                 }
           }
         >
@@ -135,9 +141,10 @@ export const GetStarted = () => {
     Array.isArray(activeItem.images) &&
     activeItem.images.length > 0
 
-  const handleImageClick = (src, alt) => {
+  const handleImageClick = (src, alt, type = 'image') => {
     setPreviewImageSrc(src)
     setPreviewImageAlt(alt || 'Image preview')
+    setPreviewImageType(type)
     openImagePreview()
   }
 
@@ -198,6 +205,9 @@ export const GetStarted = () => {
                     {activeItem.images.map((image, index) => {
                       const inlineSrc = image.src
                       const modalSrc = image.modalSrc || image.src
+                      const modalType =
+                        image.modalType ||
+                        (isHtmlFigure(modalSrc) ? 'html' : 'image')
                       const altText =
                         image.alt || `${activeItem.name} image ${index + 1}`
 
@@ -225,7 +235,7 @@ export const GetStarted = () => {
                               width='100%'
                               maxW='360px'
                               onClick={() =>
-                                handleImageClick(modalSrc, altText)
+                                handleImageClick(modalSrc, altText, modalType)
                               }
                             >
                               Open larger view
@@ -235,17 +245,43 @@ export const GetStarted = () => {
                       }
 
                       return (
-                        <Image
+                        <Box
                           key={`${inlineSrc}-${index}`}
-                          src={inlineSrc}
-                          alt={altText}
+                          position='relative'
                           width='100%'
                           maxW='360px'
-                          borderRadius='md'
-                          cursor='pointer'
                           mt={index === 0 ? 0 : 4}
-                          onClick={() => handleImageClick(modalSrc, altText)}
-                        />
+                        >
+                          <Image
+                            src={inlineSrc}
+                            alt={altText}
+                            width='100%'
+                            maxW='360px'
+                            borderRadius='md'
+                            cursor='pointer'
+                            onClick={() =>
+                              handleImageClick(modalSrc, altText, modalType)
+                            }
+                          />
+                          {modalType === 'panorama' && (
+                            <Text
+                              position='absolute'
+                              top={2}
+                              right={2}
+                              aria-label='360 degree panorama'
+                              bg='blackAlpha.800'
+                              color='white'
+                              fontSize='xs'
+                              fontWeight='bold'
+                              px={2}
+                              py={1}
+                              borderRadius='md'
+                              pointerEvents='none'
+                            >
+                              360°
+                            </Text>
+                          )}
+                        </Box>
                       )
                     })}
                     <Text
@@ -273,7 +309,16 @@ export const GetStarted = () => {
         <ModalContent bg='transparent' boxShadow='none'>
           <ModalCloseButton color='white' zIndex={2} />
           <ModalBody p={0} display='flex' justifyContent='center'>
-            {isHtmlFigure(previewImageSrc) ? (
+            {previewImageType === 'panorama' ? (
+              <Box width='100%' bg='white' borderRadius='md' px={2}>
+                <Panorama
+                  src={previewImageSrc}
+                  alt={previewImageAlt}
+                  height='70vh'
+                  hint='Drag to look around. On mobile, drag or move your device.'
+                />
+              </Box>
+            ) : isHtmlFigure(previewImageSrc) ? (
               <Box
                 as='iframe'
                 src={previewImageSrc}

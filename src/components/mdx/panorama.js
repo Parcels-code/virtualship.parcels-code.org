@@ -175,7 +175,7 @@ export const Panorama = ({
   }, [src])
 
   return (
-    <Box my={6}>
+    <Box my={6} position='relative'>
       {!viewerFailed && (
         <Box
           ref={containerRef}
@@ -204,6 +204,23 @@ export const Panorama = ({
 
       <Text mt={2} fontSize='sm' color='gray.500'>
         {viewerLoaded || viewerFailed ? hint : 'Loading 360 view...'}
+      </Text>
+
+      <Text
+        position='absolute'
+        top={2}
+        right={2}
+        aria-label='360 degree panorama'
+        bg='blackAlpha.800'
+        color='white'
+        fontSize='xs'
+        fontWeight='bold'
+        px={2}
+        py={1}
+        borderRadius='md'
+        pointerEvents='none'
+      >
+        360°
       </Text>
     </Box>
   )

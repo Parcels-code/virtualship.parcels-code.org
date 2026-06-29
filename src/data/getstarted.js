@@ -58,7 +58,8 @@ export const GetStarted = [
         alt: 'Interactive Argo profile figure',
       },
       {
-        src: '/getstarted/researcher/VRfigure1.png',
+        src: '/getstarted/researcher/IMG_DrylabAWvB_DDeck_00_110.jpg',
+        modalType: 'panorama',
         alt: 'Researcher VR figure',
       },
     ],
