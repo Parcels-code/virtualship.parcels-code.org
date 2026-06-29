@@ -4,6 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
 import { useEffect } from 'react'
+import 'pannellum/build/pannellum.css'
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
