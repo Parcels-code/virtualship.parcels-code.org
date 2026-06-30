@@ -123,8 +123,6 @@ export const Panorama = ({
   const animationFrameRef = useRef(null)
   const [viewerFailed, setViewerFailed] = useState(false)
   const [viewerLoaded, setViewerLoaded] = useState(false)
-  const [videoReadyToPlay, setVideoReadyToPlay] = useState(false)
-  const [videoPlaying, setVideoPlaying] = useState(false)
   const isVideoSource = isVideoPanoramaSource(src)
 
   useEffect(() => {
@@ -132,8 +130,6 @@ export const Panorama = ({
 
     setViewerFailed(false)
     setViewerLoaded(false)
-    setVideoReadyToPlay(false)
-    setVideoPlaying(false)
     videoElementRef.current = null
 
     const setupThreeVideoViewer = async () => {
@@ -152,16 +148,11 @@ export const Panorama = ({
         videoElement.setAttribute('webkit-playsinline', '')
         videoElement.playsInline = true
         videoElement.loop = true
-        videoElement.muted = true
+        videoElement.muted = false
+        videoElement.defaultMuted = false
+        videoElement.volume = 1
         videoElement.preload = 'auto'
         videoElementRef.current = videoElement
-
-        videoElement.addEventListener('play', () => {
-          if (!cancelled) setVideoPlaying(true)
-        })
-        videoElement.addEventListener('pause', () => {
-          if (!cancelled) setVideoPlaying(false)
-        })
 
         try {
           await waitForVideoReady(videoElement, VIDEO_PANORAMA_TIMEOUT_MS)
@@ -270,7 +261,9 @@ export const Panorama = ({
         try {
           await videoElement.play()
         } catch {
-          // Autoplay may be blocked; overlay allows manual start.
+          if (!cancelled) {
+            setViewerFailed(true)
+          }
         }
 
         if (cancelled) return
@@ -403,17 +396,6 @@ export const Panorama = ({
     }
   }, [src, isVideoSource])
 
-  const handleStartVideo = async () => {
-    if (!videoElementRef.current) return
-
-    try {
-      await videoElementRef.current.play()
-      setVideoPlaying(true)
-    } catch {
-      // If play still fails, keep overlay visible so the user can try again.
-    }
-  }
-
   return (
     <Box my={6} position='relative'>
       {!viewerFailed && (
@@ -429,33 +411,6 @@ export const Panorama = ({
           userSelect='none'
           style={{ WebkitUserSelect: 'none', touchAction: 'none' }}
         />
-      )}
-
-      {!viewerFailed && isVideoSource && videoReadyToPlay && !videoPlaying && (
-        <Box
-          position='absolute'
-          inset={0}
-          display='flex'
-          alignItems='center'
-          justifyContent='center'
-          borderRadius='md'
-          bg='blackAlpha.600'
-          cursor='pointer'
-          onClick={handleStartVideo}
-          zIndex={1}
-        >
-          <Text
-            color='white'
-            fontWeight='bold'
-            fontSize={{ base: 'sm', md: 'md' }}
-            bg='blackAlpha.700'
-            px={4}
-            py={2}
-            borderRadius='md'
-          >
-            Click to start 360 video
-          </Text>
-        </Box>
       )}
 
       {viewerFailed &&
