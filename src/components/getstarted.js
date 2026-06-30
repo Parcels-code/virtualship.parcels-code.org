@@ -440,7 +440,14 @@ export const GetStarted = () => {
       <Modal isOpen={isImagePreviewOpen} onClose={closeImagePreview} size='4xl'>
         <ModalOverlay bg='blackAlpha.700' />
         <ModalContent bg='transparent' boxShadow='none'>
-          <ModalCloseButton color='white' zIndex={2} />
+          {previewImageType !== 'video' && (
+            <ModalCloseButton
+              color='black'
+              bg='white'
+              _hover={{ bg: 'gray.100' }}
+              zIndex={2}
+            />
+          )}
           <ModalBody p={0} display='flex' justifyContent='center'>
             {previewImageType === 'panorama' ? (
               <Box width='100%' bg='white' borderRadius='md' px={2}>
@@ -450,6 +457,7 @@ export const GetStarted = () => {
                   height='70vh'
                   hint='Drag to look around. On mobile, drag or move your device.'
                   initialYawOffsetDeg={previewInitialYawOffsetDeg}
+                  onRequestClose={closeImagePreview}
                 />
               </Box>
             ) : isHtmlFigure(previewImageSrc) ? (
@@ -471,6 +479,7 @@ export const GetStarted = () => {
                   height='70vh'
                   hint='Drag to look around. On mobile, drag or move your device.'
                   initialYawOffsetDeg={previewInitialYawOffsetDeg}
+                  onRequestClose={closeImagePreview}
                 />
               </Box>
             ) : (

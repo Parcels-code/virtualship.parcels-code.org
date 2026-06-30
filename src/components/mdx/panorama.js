@@ -117,6 +117,7 @@ export const Panorama = ({
   height = '420px',
   hint = DEFAULT_HINT,
   initialYawOffsetDeg = DEFAULT_VIDEO_INITIAL_YAW_OFFSET_DEG,
+  onRequestClose,
   ...imageProps
 }) => {
   const containerRef = useRef(null)
@@ -125,6 +126,7 @@ export const Panorama = ({
   const animationFrameRef = useRef(null)
   const [viewerFailed, setViewerFailed] = useState(false)
   const [viewerLoaded, setViewerLoaded] = useState(false)
+  const [isMuted, setIsMuted] = useState(false)
   const isVideoSource = isVideoPanoramaSource(src)
 
   useEffect(() => {
@@ -132,6 +134,7 @@ export const Panorama = ({
 
     setViewerFailed(false)
     setViewerLoaded(false)
+    setIsMuted(false)
     videoElementRef.current = null
 
     const setupThreeVideoViewer = async () => {
@@ -155,6 +158,14 @@ export const Panorama = ({
         videoElement.volume = 1
         videoElement.preload = 'auto'
         videoElementRef.current = videoElement
+        setIsMuted(videoElement.muted)
+
+        const handleVolumeChange = () => {
+          if (!cancelled) {
+            setIsMuted(videoElement.muted)
+          }
+        }
+        videoElement.addEventListener('volumechange', handleVolumeChange)
 
         try {
           await waitForVideoReady(videoElement, VIDEO_PANORAMA_TIMEOUT_MS)
@@ -271,6 +282,7 @@ export const Panorama = ({
         if (cancelled) return
 
         return () => {
+          videoElement.removeEventListener('volumechange', handleVolumeChange)
           container.removeEventListener('pointerdown', handlePointerDown)
           window.removeEventListener('pointermove', handlePointerMove)
           window.removeEventListener('pointerup', handlePointerUp)
@@ -398,6 +410,17 @@ export const Panorama = ({
     }
   }, [src, isVideoSource, initialYawOffsetDeg])
 
+  const handleToggleMute = () => {
+    if (!videoElementRef.current) return
+
+    const nextMuted = !videoElementRef.current.muted
+    videoElementRef.current.muted = nextMuted
+    if (!nextMuted && videoElementRef.current.volume === 0) {
+      videoElementRef.current.volume = 1
+    }
+    setIsMuted(nextMuted)
+  }
+
   return (
     <Box my={6} position='relative'>
       {!viewerFailed && (
@@ -437,6 +460,52 @@ export const Panorama = ({
           />
         ))}
 
+      {!viewerFailed && isVideoSource && viewerLoaded && (
+        <Box
+          as='button'
+          type='button'
+          position='absolute'
+          bottom={2}
+          right={2}
+          zIndex={2}
+          bg='blackAlpha.800'
+          color='white'
+          fontSize='xs'
+          fontWeight='bold'
+          px={3}
+          py={2}
+          borderRadius='md'
+          onClick={handleToggleMute}
+          aria-label={isMuted ? 'Unmute 360 video' : 'Mute 360 video'}
+        >
+          {isMuted ? 'Unmute' : 'Mute'}
+        </Box>
+      )}
+
+      {!viewerFailed &&
+        isVideoSource &&
+        typeof onRequestClose === 'function' && (
+          <Box
+            as='button'
+            type='button'
+            position='absolute'
+            top={2}
+            right={2}
+            zIndex={2}
+            bg='blackAlpha.800'
+            color='white'
+            fontSize='sm'
+            fontWeight='bold'
+            px={3}
+            py={2}
+            borderRadius='md'
+            onClick={onRequestClose}
+            aria-label='Close popup'
+          >
+            X
+          </Box>
+        )}
+
       <Text mt={2} fontSize='sm' color='gray.500'>
         {viewerLoaded || viewerFailed ? hint : 'Loading 360 view...'}
       </Text>
@@ -444,7 +513,7 @@ export const Panorama = ({
       <Text
         position='absolute'
         top={2}
-        right={2}
+        left={2}
         aria-label='360 degree panorama'
         bg='blackAlpha.800'
         color='white'
