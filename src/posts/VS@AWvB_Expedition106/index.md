@@ -1,6 +1,6 @@
 ---
 title: 'Live from the Anna Weber-van Bosse vessel!'
-date: '2025-06-29'
+date: '2026-06-29'
 authors:
   - name: Gonçalo Albergaria
     github: GoncaloAlbergaria
