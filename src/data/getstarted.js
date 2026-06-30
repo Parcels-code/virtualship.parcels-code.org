@@ -68,6 +68,12 @@ export const GetStarted = [
         modalType: 'panorama',
         alt: 'Researcher VR figure',
       },
+      {
+        src: '/video-thumbnails/clip3-Pelagia-JanBerend-chemlab.jpg',
+        modalSrc: '/videos-360/clip3_PelagiaJanBerendchemlabHD.mp4',
+        modalType: 'video',
+        alt: '360 video preview from the RV Pelagia chemistry lab',
+      },
     ],
     text: `Researchers can design, test, and optimise oceanographic sampling strategies with VirtualShip's flexible Python package before going to sea.
 
