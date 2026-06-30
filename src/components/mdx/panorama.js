@@ -4,6 +4,37 @@ import { Image } from '@/components/mdx/image'
 
 const DEFAULT_HINT = 'Drag to look around. On mobile, drag or move your device.'
 const FALLBACK_MAX_TEXTURE_SIZE = 2048
+const VIDEO_PANORAMA_TIMEOUT_MS = 5000
+const isVideoPanoramaSource = (source) =>
+  /\.(mov|mp4|webm|ogg)$/i.test(source?.split('?')[0] || '')
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
+
+const waitForVideoReady = (videoElement, timeoutMs) =>
+  new Promise((resolve, reject) => {
+    let settled = false
+
+    const finish = (callback) => {
+      if (settled) return
+      settled = true
+      clearTimeout(timeoutId)
+      videoElement.removeEventListener('loadeddata', onReady)
+      videoElement.removeEventListener('canplay', onReady)
+      videoElement.removeEventListener('error', onError)
+      callback()
+    }
+
+    const onReady = () => finish(resolve)
+    const onError = () => finish(() => reject(new Error('Video load failed')))
+    const timeoutId = setTimeout(
+      () => finish(() => reject(new Error('Video load timed out'))),
+      timeoutMs,
+    )
+
+    videoElement.addEventListener('loadeddata', onReady)
+    videoElement.addEventListener('canplay', onReady)
+    videoElement.addEventListener('error', onError)
+    videoElement.load()
+  })
 
 const getViewerFactory = (pannellumModule) => {
   if (typeof window !== 'undefined' && window.pannellum) {
@@ -88,13 +119,184 @@ export const Panorama = ({
 }) => {
   const containerRef = useRef(null)
   const viewerRef = useRef(null)
+  const videoElementRef = useRef(null)
+  const animationFrameRef = useRef(null)
   const [viewerFailed, setViewerFailed] = useState(false)
   const [viewerLoaded, setViewerLoaded] = useState(false)
+  const [videoReadyToPlay, setVideoReadyToPlay] = useState(false)
+  const [videoPlaying, setVideoPlaying] = useState(false)
+  const isVideoSource = isVideoPanoramaSource(src)
 
   useEffect(() => {
     let cancelled = false
+
     setViewerFailed(false)
     setViewerLoaded(false)
+    setVideoReadyToPlay(false)
+    setVideoPlaying(false)
+    videoElementRef.current = null
+
+    const setupThreeVideoViewer = async () => {
+      if (!containerRef.current || !src || typeof window === 'undefined') {
+        return
+      }
+
+      try {
+        const THREE = await import('three')
+        if (cancelled || !containerRef.current) return
+
+        const videoElement = document.createElement('video')
+        videoElement.src = src
+        videoElement.crossOrigin = 'anonymous'
+        videoElement.setAttribute('playsinline', '')
+        videoElement.setAttribute('webkit-playsinline', '')
+        videoElement.playsInline = true
+        videoElement.loop = true
+        videoElement.muted = true
+        videoElement.preload = 'auto'
+        videoElementRef.current = videoElement
+
+        videoElement.addEventListener('play', () => {
+          if (!cancelled) setVideoPlaying(true)
+        })
+        videoElement.addEventListener('pause', () => {
+          if (!cancelled) setVideoPlaying(false)
+        })
+
+        try {
+          await waitForVideoReady(videoElement, VIDEO_PANORAMA_TIMEOUT_MS)
+        } catch {
+          if (!cancelled) setViewerFailed(true)
+          return
+        }
+
+        if (cancelled || !containerRef.current) return
+
+        const container = containerRef.current
+        const width = Math.max(container.clientWidth, 1)
+        const heightPx = Math.max(container.clientHeight, 1)
+
+        const scene = new THREE.Scene()
+        const camera = new THREE.PerspectiveCamera(
+          75,
+          width / heightPx,
+          1,
+          1100,
+        )
+        const renderer = new THREE.WebGLRenderer({ antialias: true })
+        renderer.setPixelRatio(window.devicePixelRatio || 1)
+        renderer.setSize(width, heightPx)
+        container.appendChild(renderer.domElement)
+
+        const texture = new THREE.VideoTexture(videoElement)
+        texture.minFilter = THREE.LinearFilter
+        texture.magFilter = THREE.LinearFilter
+        texture.generateMipmaps = false
+
+        const geometry = new THREE.SphereGeometry(500, 64, 40)
+        geometry.scale(-1, 1, 1)
+
+        const material = new THREE.MeshBasicMaterial({ map: texture })
+        const mesh = new THREE.Mesh(geometry, material)
+        scene.add(mesh)
+
+        let lon = 0
+        let lat = 0
+        let isPointerDown = false
+        let pointerDownX = 0
+        let pointerDownY = 0
+        let lonOnPointerDown = 0
+        let latOnPointerDown = 0
+        const target = new THREE.Vector3()
+
+        const handlePointerDown = (event) => {
+          isPointerDown = true
+          pointerDownX = event.clientX
+          pointerDownY = event.clientY
+          lonOnPointerDown = lon
+          latOnPointerDown = lat
+        }
+
+        const handlePointerMove = (event) => {
+          if (!isPointerDown) return
+          lon = (pointerDownX - event.clientX) * 0.1 + lonOnPointerDown
+          lat = (event.clientY - pointerDownY) * 0.1 + latOnPointerDown
+        }
+
+        const handlePointerUp = () => {
+          isPointerDown = false
+        }
+
+        const handleWheel = (event) => {
+          camera.fov = clamp(camera.fov + event.deltaY * 0.05, 30, 100)
+          camera.updateProjectionMatrix()
+        }
+
+        const handleResize = () => {
+          if (!containerRef.current) return
+          const nextWidth = Math.max(containerRef.current.clientWidth, 1)
+          const nextHeight = Math.max(containerRef.current.clientHeight, 1)
+          camera.aspect = nextWidth / nextHeight
+          camera.updateProjectionMatrix()
+          renderer.setSize(nextWidth, nextHeight)
+        }
+
+        container.addEventListener('pointerdown', handlePointerDown)
+        window.addEventListener('pointermove', handlePointerMove)
+        window.addEventListener('pointerup', handlePointerUp)
+        container.addEventListener('wheel', handleWheel, { passive: true })
+        window.addEventListener('resize', handleResize)
+
+        const animate = () => {
+          if (cancelled) return
+          lat = clamp(lat, -85, 85)
+          const phi = THREE.MathUtils.degToRad(90 - lat)
+          const theta = THREE.MathUtils.degToRad(lon)
+
+          target.set(
+            500 * Math.sin(phi) * Math.cos(theta),
+            500 * Math.cos(phi),
+            500 * Math.sin(phi) * Math.sin(theta),
+          )
+
+          camera.lookAt(target)
+          renderer.render(scene, camera)
+          animationFrameRef.current = window.requestAnimationFrame(animate)
+        }
+
+        setViewerLoaded(true)
+        animationFrameRef.current = window.requestAnimationFrame(animate)
+
+        try {
+          await videoElement.play()
+        } catch {
+          // Autoplay may be blocked; overlay allows manual start.
+        }
+
+        if (cancelled) return
+
+        return () => {
+          container.removeEventListener('pointerdown', handlePointerDown)
+          window.removeEventListener('pointermove', handlePointerMove)
+          window.removeEventListener('pointerup', handlePointerUp)
+          container.removeEventListener('wheel', handleWheel)
+          window.removeEventListener('resize', handleResize)
+          if (animationFrameRef.current) {
+            window.cancelAnimationFrame(animationFrameRef.current)
+            animationFrameRef.current = null
+          }
+          geometry.dispose()
+          material.dispose()
+          texture.dispose()
+          renderer.dispose()
+          if (renderer.domElement.parentNode === container) {
+            container.removeChild(renderer.domElement)
+          }
+        }
+      } catch {
+        if (!cancelled) setViewerFailed(true)
+      }
+    }
 
     const initViewer = (viewerFactory, panoramaSource) => {
       viewerRef.current = viewerFactory(containerRef.current, {
@@ -113,7 +315,7 @@ export const Panorama = ({
           if (!cancelled) setViewerLoaded(true)
         })
 
-        viewerRef.current.on('error', (error) => {
+        viewerRef.current.on('error', () => {
           if (cancelled) return
           setViewerFailed(true)
         })
@@ -122,6 +324,14 @@ export const Panorama = ({
 
     const setupViewer = async () => {
       if (!containerRef.current || !src || typeof window === 'undefined') {
+        return
+      }
+
+      if (isVideoSource) {
+        const cleanupThreeVideoViewer = await setupThreeVideoViewer()
+        if (typeof cleanupThreeVideoViewer === 'function') {
+          return cleanupThreeVideoViewer
+        }
         return
       }
 
@@ -160,19 +370,49 @@ export const Panorama = ({
       }
     }
 
-    setupViewer()
+    let cleanupView = null
+
+    const runSetup = async () => {
+      cleanupView = await setupViewer()
+    }
+
+    runSetup()
 
     return () => {
       cancelled = true
+      if (typeof cleanupView === 'function') {
+        cleanupView()
+      }
       if (
         viewerRef.current &&
         typeof viewerRef.current.destroy === 'function'
       ) {
         viewerRef.current.destroy()
       }
+      if (videoElementRef.current) {
+        videoElementRef.current.pause()
+        videoElementRef.current.removeAttribute('src')
+        videoElementRef.current.load()
+      }
+      if (animationFrameRef.current) {
+        window.cancelAnimationFrame(animationFrameRef.current)
+        animationFrameRef.current = null
+      }
+      videoElementRef.current = null
       viewerRef.current = null
     }
-  }, [src])
+  }, [src, isVideoSource])
+
+  const handleStartVideo = async () => {
+    if (!videoElementRef.current) return
+
+    try {
+      await videoElementRef.current.play()
+      setVideoPlaying(true)
+    } catch {
+      // If play still fails, keep overlay visible so the user can try again.
+    }
+  }
 
   return (
     <Box my={6} position='relative'>
@@ -186,21 +426,59 @@ export const Panorama = ({
           height={height}
           width='100%'
           cursor='grab'
-          touchAction='none'
           userSelect='none'
-          style={{ WebkitUserSelect: 'none' }}
+          style={{ WebkitUserSelect: 'none', touchAction: 'none' }}
         />
       )}
 
-      {viewerFailed && (
-        <Image
-          src={src}
-          alt={alt}
+      {!viewerFailed && isVideoSource && videoReadyToPlay && !videoPlaying && (
+        <Box
+          position='absolute'
+          inset={0}
+          display='flex'
+          alignItems='center'
+          justifyContent='center'
           borderRadius='md'
-          width='100%'
-          {...imageProps}
-        />
+          bg='blackAlpha.600'
+          cursor='pointer'
+          onClick={handleStartVideo}
+          zIndex={1}
+        >
+          <Text
+            color='white'
+            fontWeight='bold'
+            fontSize={{ base: 'sm', md: 'md' }}
+            bg='blackAlpha.700'
+            px={4}
+            py={2}
+            borderRadius='md'
+          >
+            Click to start 360 video
+          </Text>
+        </Box>
       )}
+
+      {viewerFailed &&
+        (isVideoPanoramaSource(src) ? (
+          <Box
+            as='video'
+            src={src}
+            controls
+            autoPlay
+            width='100%'
+            borderRadius='md'
+            maxH={height}
+            bg='black'
+          />
+        ) : (
+          <Image
+            src={src}
+            alt={alt}
+            borderRadius='md'
+            width='100%'
+            {...imageProps}
+          />
+        ))}
 
       <Text mt={2} fontSize='sm' color='gray.500'>
         {viewerLoaded || viewerFailed ? hint : 'Loading 360 view...'}

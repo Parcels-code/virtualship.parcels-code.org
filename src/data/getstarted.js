@@ -10,6 +10,12 @@ export const GetStarted = [
         src: '/getstarted/learner/Agulhas_plot.png',
         alt: 'Output of a VirtualShip simulation in the Agulhas Region',
       },
+      {
+        src: '/video-thumbnails/virtualship-demo.jpg',
+        modalSrc: '/videos-360/clip1_PelagiaJaccosidedeckHD.mp4',
+        modalType: 'video',
+        alt: '360 video preview from the RV Pelagia deck',
+      },
     ],
 
     text: `VirtualShip supports students with a realistic framework to experience oceanographic fieldwork within a virtual environment.

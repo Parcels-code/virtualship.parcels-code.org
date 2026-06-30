@@ -135,11 +135,40 @@ export const GetStarted = () => {
     return nodes
   }
 
+  const isHtmlFigure = (src) => src?.toLowerCase().endsWith('.html')
+  const isVideoFigure = (src) =>
+    /\.(mov|mp4|webm|ogg)$/i.test(src?.split('?')[0] || '')
+
   const activeItem = activeIndex !== null ? getstarted[activeIndex] : null
   const hasActiveItemImages =
     activeItem &&
     Array.isArray(activeItem.images) &&
     activeItem.images.length > 0
+  const activeItemImages = hasActiveItemImages ? activeItem.images : []
+  const sidebarImages = activeItemImages.filter((image) => {
+    const modalSrc = image.modalSrc || image.src
+    const modalType =
+      image.modalType ||
+      (isHtmlFigure(modalSrc)
+        ? 'html'
+        : isVideoFigure(modalSrc)
+          ? 'video'
+          : 'image')
+
+    return modalType !== 'video'
+  })
+  const inlineVideoImages = activeItemImages.filter((image) => {
+    const modalSrc = image.modalSrc || image.src
+    const modalType =
+      image.modalType ||
+      (isHtmlFigure(modalSrc)
+        ? 'html'
+        : isVideoFigure(modalSrc)
+          ? 'video'
+          : 'image')
+
+    return modalType === 'video'
+  })
 
   const handleImageClick = (src, alt, type = 'image') => {
     setPreviewImageSrc(src)
@@ -147,8 +176,6 @@ export const GetStarted = () => {
     setPreviewImageType(type)
     openImagePreview()
   }
-
-  const isHtmlFigure = (src) => src?.toLowerCase().endsWith('.html')
 
   return (
     <Box id={'getstarted'} as='section' bg='#AEB8FE' mb={0} pt={6} pb={12}>
@@ -198,16 +225,74 @@ export const GetStarted = () => {
                   gap={6}
                   alignItems='start'
                 >
-                  <Text fontSize={'lg'} whiteSpace='pre-line'>
-                    {renderTextWithLinks(getstarted[activeIndex].text)}
-                  </Text>
+                  <Box>
+                    <Text fontSize={'lg'} whiteSpace='pre-line'>
+                      {renderTextWithLinks(getstarted[activeIndex].text)}
+                    </Text>
+                    {inlineVideoImages.map((image, index) => {
+                      const inlineSrc = image.src
+                      const modalSrc = image.modalSrc || image.src
+                      const modalType = image.modalType || 'video'
+                      const altText =
+                        image.alt || `${activeItem.name} video ${index + 1}`
+
+                      return (
+                        <Box
+                          key={`${inlineSrc}-${index}`}
+                          position='relative'
+                          width='100%'
+                          mt={4}
+                        >
+                          <Image
+                            src={inlineSrc}
+                            alt={altText}
+                            width='100%'
+                            borderRadius='md'
+                            cursor='pointer'
+                            onClick={() =>
+                              handleImageClick(modalSrc, altText, modalType)
+                            }
+                          />
+                          <Box
+                            position='absolute'
+                            top='50%'
+                            left='50%'
+                            transform='translate(-50%, -50%)'
+                            bg='blackAlpha.700'
+                            color='white'
+                            borderRadius='full'
+                            px={6}
+                            py={3}
+                            display='flex'
+                            alignItems='center'
+                            justifyContent='center'
+                            gap={3}
+                            fontSize={{ base: 'sm', md: 'md' }}
+                            fontWeight='semibold'
+                            lineHeight='1'
+                            pointerEvents='none'
+                            aria-label='play 360° video'
+                          >
+                            <Box as='span' aria-hidden='true'>
+                              ▶
+                            </Box>
+                            <Box as='span'>Play 360° video</Box>
+                          </Box>
+                        </Box>
+                      )
+                    })}
+                  </Box>
                   <Box justifySelf={{ base: 'center', md: 'end' }}>
-                    {activeItem.images.map((image, index) => {
+                    {sidebarImages.map((image, index) => {
                       const inlineSrc = image.src
                       const modalSrc = image.modalSrc || image.src
                       const modalType =
                         image.modalType ||
-                        (isHtmlFigure(modalSrc) ? 'html' : 'image')
+                        (isHtmlFigure(modalSrc)
+                          ? 'html'
+                          : isVideoFigure(modalSrc)
+                            ? 'video'
+                            : 'image')
                       const altText =
                         image.alt || `${activeItem.name} image ${index + 1}`
 
@@ -281,17 +366,47 @@ export const GetStarted = () => {
                               360°
                             </Text>
                           )}
+                          {modalType === 'video' && (
+                            <Box
+                              position='absolute'
+                              top='50%'
+                              left='50%'
+                              transform='translate(-50%, -50%)'
+                              bg='blackAlpha.700'
+                              color='white'
+                              borderRadius='full'
+                              px={4}
+                              py={2}
+                              display='flex'
+                              alignItems='center'
+                              justifyContent='center'
+                              gap={2}
+                              fontSize='sm'
+                              fontWeight='semibold'
+                              lineHeight='1'
+                              pointerEvents='none'
+                              aria-label='play 360 degree video'
+                            >
+                              <Box as='span' aria-hidden='true'>
+                                ▶
+                              </Box>
+                              <Box as='span'>Play 360degree video</Box>
+                            </Box>
+                          )}
                         </Box>
                       )
                     })}
-                    <Text
-                      mt={2}
-                      fontSize='sm'
-                      color='gray.800'
-                      textAlign='center'
-                    >
-                      [click figures above to open a larger view]
-                    </Text>
+                    {(sidebarImages.length > 0 ||
+                      inlineVideoImages.length > 0) && (
+                      <Text
+                        mt={2}
+                        fontSize='sm'
+                        color='gray.800'
+                        textAlign='center'
+                      >
+                        [click figures above to open a larger view]
+                      </Text>
+                    )}
                   </Box>
                 </Grid>
               ) : (
@@ -329,6 +444,15 @@ export const GetStarted = () => {
                 borderRadius='md'
                 bg='white'
               />
+            ) : previewImageType === 'video' ? (
+              <Box width='100%' bg='white' borderRadius='md' px={2}>
+                <Panorama
+                  src={previewImageSrc}
+                  alt={previewImageAlt}
+                  height='70vh'
+                  hint='Drag to look around. On mobile, drag or move your device.'
+                />
+              </Box>
             ) : (
               <Image
                 src={previewImageSrc}
