@@ -40,6 +40,22 @@ export const GetStarted = [
         src: '/getstarted/educator/VRclassroom2.JPG',
         alt: 'A photo of students using the VR material in the VirtualShip classroom',
       },
+      {
+        src: '/getstarted/educator/exampleassignment_wintertimeirmingersea_page1.jpg',
+        modalSrc:
+          '/getstarted/educator/exampleassignment_wintertimeirmingersea.pdf',
+        modalType: 'html',
+        inlineBelowText: true,
+        alt: 'First page preview of the Wintertime Irminger Sea example assignment PDF',
+      },
+      {
+        src: '/getstarted/educator/exampleassignment_betweentigersandmonsoons_page1.jpg',
+        modalSrc:
+          '/getstarted/educator/exampleassignment_betweentigersandmonsoons.pdf',
+        modalType: 'html',
+        inlineBelowText: true,
+        alt: 'First page preview of the Between Tigers and Monsoons example assignment PDF',
+      },
     ],
 
     text: `VirtualShip provides educators with a modular framework to integrate virtual oceanographic fieldwork into higher education curricula.

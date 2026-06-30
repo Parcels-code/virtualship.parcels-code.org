@@ -138,6 +138,7 @@ export const GetStarted = () => {
   }
 
   const isHtmlFigure = (src) => src?.toLowerCase().endsWith('.html')
+  const isPdfFigure = (src) => src?.toLowerCase().endsWith('.pdf')
   const isVideoFigure = (src) =>
     /\.(mov|mp4|webm|ogg)$/i.test(src?.split('?')[0] || '')
 
@@ -148,6 +149,10 @@ export const GetStarted = () => {
     activeItem.images.length > 0
   const activeItemImages = hasActiveItemImages ? activeItem.images : []
   const sidebarImages = activeItemImages.filter((image) => {
+    if (image.inlineBelowText) {
+      return false
+    }
+
     const modalSrc = image.modalSrc || image.src
     const modalType =
       image.modalType ||
@@ -171,6 +176,9 @@ export const GetStarted = () => {
 
     return modalType === 'video'
   })
+  const inlineBelowTextImages = activeItemImages.filter(
+    (image) => image.inlineBelowText,
+  )
 
   const handleImageClick = (
     src,
@@ -237,6 +245,51 @@ export const GetStarted = () => {
                     <Text fontSize={'lg'} whiteSpace='pre-line'>
                       {renderTextWithLinks(getstarted[activeIndex].text)}
                     </Text>
+                    {inlineBelowTextImages.length > 0 && (
+                      <>
+                        <Grid
+                          templateColumns={{ base: '1fr', md: '1fr 1fr' }}
+                          gap={4}
+                          mt={4}
+                        >
+                          {inlineBelowTextImages.map((image, index) => {
+                            const inlineSrc = image.src
+                            const modalSrc = image.modalSrc || image.src
+                            const modalType = image.modalType || 'html'
+                            const altText =
+                              image.alt ||
+                              `${activeItem.name} document ${index + 1}`
+
+                            return (
+                              <Box
+                                key={`${inlineSrc}-${index}`}
+                                position='relative'
+                                width='100%'
+                              >
+                                <Image
+                                  src={inlineSrc}
+                                  alt={altText}
+                                  width='100%'
+                                  borderRadius='md'
+                                  cursor='pointer'
+                                  onClick={() =>
+                                    handleImageClick(
+                                      modalSrc,
+                                      altText,
+                                      modalType,
+                                      image.initialYawOffsetDeg,
+                                    )
+                                  }
+                                />
+                              </Box>
+                            )
+                          })}
+                        </Grid>
+                        <Text mt={2} fontSize='sm' color='gray.700'>
+                          [click thumbnails above to open full assignment PDFs]
+                        </Text>
+                      </>
+                    )}
                     {inlineVideoImages.map((image, index) => {
                       const inlineSrc = image.src
                       const modalSrc = image.modalSrc || image.src
@@ -439,7 +492,7 @@ export const GetStarted = () => {
 
       <Modal isOpen={isImagePreviewOpen} onClose={closeImagePreview} size='4xl'>
         <ModalOverlay bg='blackAlpha.700' />
-        <ModalContent bg='transparent' boxShadow='none'>
+        <ModalContent bg='white' boxShadow='lg'>
           {previewImageType !== 'video' && (
             <ModalCloseButton
               color='black'
@@ -460,17 +513,25 @@ export const GetStarted = () => {
                   onRequestClose={closeImagePreview}
                 />
               </Box>
-            ) : isHtmlFigure(previewImageSrc) ? (
+            ) : isHtmlFigure(previewImageSrc) ||
+              isPdfFigure(previewImageSrc) ||
+              previewImageType === 'html' ? (
               <Box
-                as='iframe'
-                src={previewImageSrc}
-                title={previewImageAlt}
                 width='100%'
                 height='80vh'
-                border='none'
                 borderRadius='md'
                 bg='white'
-              />
+                overflow='auto'
+              >
+                <Box
+                  as='iframe'
+                  src={previewImageSrc}
+                  title={previewImageAlt}
+                  width='100%'
+                  height='100%'
+                  border='none'
+                />
+              </Box>
             ) : previewImageType === 'video' ? (
               <Box width='100%' bg='white' borderRadius='md' px={2}>
                 <Panorama
