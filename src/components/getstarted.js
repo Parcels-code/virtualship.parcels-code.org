@@ -27,6 +27,8 @@ export const GetStarted = () => {
   )
   const [previewImageAlt, setPreviewImageAlt] = React.useState('Image preview')
   const [previewImageType, setPreviewImageType] = React.useState('image')
+  const [previewInitialYawOffsetDeg, setPreviewInitialYawOffsetDeg] =
+    React.useState(undefined)
   const {
     isOpen: isImagePreviewOpen,
     onOpen: openImagePreview,
@@ -170,10 +172,16 @@ export const GetStarted = () => {
     return modalType === 'video'
   })
 
-  const handleImageClick = (src, alt, type = 'image') => {
+  const handleImageClick = (
+    src,
+    alt,
+    type = 'image',
+    initialYawOffsetDeg = undefined,
+  ) => {
     setPreviewImageSrc(src)
     setPreviewImageAlt(alt || 'Image preview')
     setPreviewImageType(type)
+    setPreviewInitialYawOffsetDeg(initialYawOffsetDeg)
     openImagePreview()
   }
 
@@ -250,7 +258,12 @@ export const GetStarted = () => {
                             borderRadius='md'
                             cursor='pointer'
                             onClick={() =>
-                              handleImageClick(modalSrc, altText, modalType)
+                              handleImageClick(
+                                modalSrc,
+                                altText,
+                                modalType,
+                                image.initialYawOffsetDeg,
+                              )
                             }
                           />
                           <Box
@@ -345,7 +358,12 @@ export const GetStarted = () => {
                             borderRadius='md'
                             cursor='pointer'
                             onClick={() =>
-                              handleImageClick(modalSrc, altText, modalType)
+                              handleImageClick(
+                                modalSrc,
+                                altText,
+                                modalType,
+                                image.initialYawOffsetDeg,
+                              )
                             }
                           />
                           {modalType === 'panorama' && (
@@ -431,6 +449,7 @@ export const GetStarted = () => {
                   alt={previewImageAlt}
                   height='70vh'
                   hint='Drag to look around. On mobile, drag or move your device.'
+                  initialYawOffsetDeg={previewInitialYawOffsetDeg}
                 />
               </Box>
             ) : isHtmlFigure(previewImageSrc) ? (
@@ -451,6 +470,7 @@ export const GetStarted = () => {
                   alt={previewImageAlt}
                   height='70vh'
                   hint='Drag to look around. On mobile, drag or move your device.'
+                  initialYawOffsetDeg={previewInitialYawOffsetDeg}
                 />
               </Box>
             ) : (

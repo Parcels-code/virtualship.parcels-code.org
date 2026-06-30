@@ -5,6 +5,7 @@ import { Image } from '@/components/mdx/image'
 const DEFAULT_HINT = 'Drag to look around. On mobile, drag or move your device.'
 const FALLBACK_MAX_TEXTURE_SIZE = 2048
 const VIDEO_PANORAMA_TIMEOUT_MS = 5000
+const DEFAULT_VIDEO_INITIAL_YAW_OFFSET_DEG = 0
 const isVideoPanoramaSource = (source) =>
   /\.(mov|mp4|webm|ogg)$/i.test(source?.split('?')[0] || '')
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
@@ -115,6 +116,7 @@ export const Panorama = ({
   alt,
   height = '420px',
   hint = DEFAULT_HINT,
+  initialYawOffsetDeg = DEFAULT_VIDEO_INITIAL_YAW_OFFSET_DEG,
   ...imageProps
 }) => {
   const containerRef = useRef(null)
@@ -242,7 +244,7 @@ export const Panorama = ({
           if (cancelled) return
           lat = clamp(lat, -85, 85)
           const phi = THREE.MathUtils.degToRad(90 - lat)
-          const theta = THREE.MathUtils.degToRad(lon)
+          const theta = THREE.MathUtils.degToRad(lon + initialYawOffsetDeg)
 
           target.set(
             500 * Math.sin(phi) * Math.cos(theta),
@@ -394,7 +396,7 @@ export const Panorama = ({
       videoElementRef.current = null
       viewerRef.current = null
     }
-  }, [src, isVideoSource])
+  }, [src, isVideoSource, initialYawOffsetDeg])
 
   return (
     <Box my={6} position='relative'>
