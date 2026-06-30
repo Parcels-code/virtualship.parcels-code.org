@@ -1,5 +1,5 @@
 import { Box, Text } from '@chakra-ui/react'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Image } from '@/components/mdx/image'
 
 const DEFAULT_HINT = 'Drag to look around. On mobile, drag or move your device.'
@@ -124,10 +124,46 @@ export const Panorama = ({
   const viewerRef = useRef(null)
   const videoElementRef = useRef(null)
   const animationFrameRef = useRef(null)
+  const gyroStateRef = useRef({
+    enabled: false,
+    yaw: 0,
+    pitch: 0,
+    yawOffset: 0,
+    hasReading: false,
+  })
   const [viewerFailed, setViewerFailed] = useState(false)
   const [viewerLoaded, setViewerLoaded] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
+  const [gyroSupported, setGyroSupported] = useState(false)
+  const [gyroEnabled, setGyroEnabled] = useState(false)
   const isVideoSource = isVideoPanoramaSource(src)
+
+  const enableGyro = useCallback(async () => {
+    if (typeof window === 'undefined') return false
+    const deviceOrientationEvent = window.DeviceOrientationEvent
+
+    if (typeof deviceOrientationEvent === 'undefined') {
+      return false
+    }
+
+    const requestPermission = deviceOrientationEvent.requestPermission
+    if (typeof requestPermission === 'function') {
+      try {
+        const permissionState = await requestPermission()
+        if (permissionState !== 'granted') {
+          return false
+        }
+      } catch {
+        return false
+      }
+    }
+
+    const gyroState = gyroStateRef.current
+    gyroState.enabled = true
+    gyroState.yawOffset = gyroState.hasReading ? -gyroState.yaw : 0
+    setGyroEnabled(true)
+    return true
+  }, [])
 
   useEffect(() => {
     let cancelled = false
@@ -135,6 +171,15 @@ export const Panorama = ({
     setViewerFailed(false)
     setViewerLoaded(false)
     setIsMuted(false)
+    setGyroSupported(false)
+    setGyroEnabled(false)
+    gyroStateRef.current = {
+      enabled: false,
+      yaw: 0,
+      pitch: 0,
+      yawOffset: 0,
+      hasReading: false,
+    }
     videoElementRef.current = null
 
     const setupThreeVideoViewer = async () => {
@@ -251,11 +296,48 @@ export const Panorama = ({
         container.addEventListener('wheel', handleWheel, { passive: true })
         window.addEventListener('resize', handleResize)
 
+        const supportsDeviceOrientation =
+          typeof window.DeviceOrientationEvent !== 'undefined'
+        if (supportsDeviceOrientation && !cancelled) {
+          setGyroSupported(true)
+        }
+
+        const handleDeviceOrientation = (event) => {
+          const { alpha, beta } = event
+          if (alpha == null && beta == null) return
+
+          const gyroState = gyroStateRef.current
+          if (alpha != null) {
+            gyroState.yaw = alpha
+          }
+          if (beta != null) {
+            gyroState.pitch = clamp(beta, -85, 85)
+          }
+          gyroState.hasReading = true
+        }
+
+        if (supportsDeviceOrientation) {
+          window.addEventListener('deviceorientation', handleDeviceOrientation)
+          // Auto-enable gyro by default when browser permissions allow it.
+          void enableGyro()
+        }
+
         const animate = () => {
           if (cancelled) return
-          lat = clamp(lat, -85, 85)
-          const phi = THREE.MathUtils.degToRad(90 - lat)
-          const theta = THREE.MathUtils.degToRad(lon + initialYawOffsetDeg)
+          const gyroState = gyroStateRef.current
+
+          let viewLon = lon + initialYawOffsetDeg
+          let viewLat = lat
+
+          if (gyroState.enabled && gyroState.hasReading) {
+            viewLon =
+              lon + initialYawOffsetDeg + gyroState.yaw + gyroState.yawOffset
+            viewLat = lat + gyroState.pitch
+          }
+
+          viewLat = clamp(viewLat, -85, 85)
+          const phi = THREE.MathUtils.degToRad(90 - viewLat)
+          const theta = THREE.MathUtils.degToRad(viewLon)
 
           target.set(
             500 * Math.sin(phi) * Math.cos(theta),
@@ -283,6 +365,12 @@ export const Panorama = ({
 
         return () => {
           videoElement.removeEventListener('volumechange', handleVolumeChange)
+          if (supportsDeviceOrientation) {
+            window.removeEventListener(
+              'deviceorientation',
+              handleDeviceOrientation,
+            )
+          }
           container.removeEventListener('pointerdown', handlePointerDown)
           window.removeEventListener('pointermove', handlePointerMove)
           window.removeEventListener('pointerup', handlePointerUp)
@@ -408,7 +496,7 @@ export const Panorama = ({
       videoElementRef.current = null
       viewerRef.current = null
     }
-  }, [src, isVideoSource, initialYawOffsetDeg])
+  }, [src, isVideoSource, initialYawOffsetDeg, enableGyro])
 
   const handleToggleMute = () => {
     if (!videoElementRef.current) return
@@ -419,6 +507,18 @@ export const Panorama = ({
       videoElementRef.current.volume = 1
     }
     setIsMuted(nextMuted)
+  }
+
+  const handleToggleGyro = async () => {
+    if (!isVideoSource || typeof window === 'undefined') return
+
+    if (gyroEnabled) {
+      gyroStateRef.current.enabled = false
+      setGyroEnabled(false)
+      return
+    }
+
+    await enableGyro()
   }
 
   return (
@@ -479,6 +579,30 @@ export const Panorama = ({
           aria-label={isMuted ? 'Unmute 360 video' : 'Mute 360 video'}
         >
           {isMuted ? 'Unmute' : 'Mute'}
+        </Box>
+      )}
+
+      {!viewerFailed && isVideoSource && viewerLoaded && gyroSupported && (
+        <Box
+          as='button'
+          type='button'
+          position='absolute'
+          bottom={2}
+          left={2}
+          zIndex={2}
+          bg='blackAlpha.800'
+          color='white'
+          fontSize='xs'
+          fontWeight='bold'
+          px={3}
+          py={2}
+          borderRadius='md'
+          onClick={handleToggleGyro}
+          aria-label={
+            gyroEnabled ? 'Disable gyro controls' : 'Enable gyro controls'
+          }
+        >
+          {gyroEnabled ? 'Gyro On' : 'Enable Gyro'}
         </Box>
       )}
 
