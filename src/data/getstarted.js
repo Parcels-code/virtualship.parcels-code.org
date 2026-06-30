@@ -97,8 +97,11 @@ export const GetStarted = [
         alt: 'Screencast of a Real-Life Challenge (RLC) in the VirtualShip software',
       },
       {
-        src: '/getstarted/developer/VRfigure1.png',
-        alt: 'Screenshot of a VR figure in the VirtualShip software',
+        src: '/video-thumbnails/clip4-Pelagia-CTD.jpg',
+        modalSrc: '/videos-360/clip4_PelagiaCTDHD.mp4',
+        modalType: 'video',
+        initialYawOffsetDeg: 180,
+        alt: '360 video preview from the RV Pelagia CTD operations',
       },
     ],
     text: `VirtualShip is built as a modular Python framework designed for collaborative development.
