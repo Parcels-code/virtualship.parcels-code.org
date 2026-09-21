@@ -92,7 +92,9 @@ export const GetStarted = [
         alt: '360 video preview from the RV Pelagia chemistry lab',
       },
     ],
-    text: `Researchers can design, test, and optimise oceanographic sampling strategies with VirtualShip's flexible Python package before going to sea. [Current implementations](https://virtualship.readthedocs.io/en/latest/user-guide/documentation/full_sensor_list.html) include instruments such as CTDs, ADCPs, Argo floats, and drifters, with several others in development.
+    text: `Researchers can design, test, and optimise oceanographic sampling strategies with VirtualShip's flexible Python package before going to sea. See the [Researcher guide](https://virtualship.readthedocs.io/en/latest/user-guide/user-profiles/researchers/index.html) for more information.
+
+    [Current implementations](https://virtualship.readthedocs.io/en/latest/user-guide/documentation/full_sensor_list.html) include instruments such as CTDs, ADCPs, Argo floats, and drifters, with several others in development.
 
     Researchers are very much encouraged to [contribute](https://virtualship.readthedocs.io/en/latest/contributing/index.html) workflows, instrument modules, and scientific applications to co-develop the VirtualShip ecosystem as open-source software towards virtual marine fieldwork.
 
