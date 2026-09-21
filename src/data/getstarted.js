@@ -58,10 +58,9 @@ export const GetStarted = [
 
     text: `VirtualShip provides educators with a modular framework to integrate virtual oceanographic fieldwork into higher education curricula.
 
-
     The package combines open educational resources, scientific simulation software, and immersive VR material to support teaching activities ranging from introductory BSc Marine Science courses to advanced data-driven research projects across a range of disciplines. Lesson plans, tutorials, and assignments allow instructors to alternately emphasise proposal writing, fieldwork planning, virtual deployments, or data analysis depending on course and cohort objectives.
 
-    The [VirtualShip Classroom](https://virtualship.readthedocs.io/en/latest/user-guide/teacher-content/index.html) has already been implemented successfully across eight BSc and MSc-level course cycles at Utrecht University and is designed to be adaptable for use beyond Utrecht.
+    The [VirtualShip Classroom](https://virtualship.readthedocs.io/en/latest/user-guide/user-profiles/educators/index.html) has already been implemented successfully across eight BSc and MSc-level course cycles at Utrecht University and is designed to be adaptable for use beyond Utrecht.
 
     [Lesson plans](https://edusources.nl/materials/76082735-37b6-4ef2-b782-6903f09b4b1a/virtual-sea-going-marine-science-fieldwork-with-virtualship), [tutorials](https://virtualship.readthedocs.io/en/latest/user-guide/tutorials/index.html), and [assignments](https://virtualship.readthedocs.io/en/latest/user-guide/assignments/index.html) allow instructors to alternately emphasise proposal writing, fieldwork planning, virtual deployments, or data analysis depending on course and cohort objectives.
 
