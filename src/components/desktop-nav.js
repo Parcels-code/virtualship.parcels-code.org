@@ -23,7 +23,7 @@ export const DesktopNav = ({ navItems, ...props }) => {
                 href={navItem.href ?? '/#'}
                 fontSize={'sm'}
                 fontWeight={'bold'}
-                // eslint-disable-next-line react-hooks/rules-of-hooks
+                 
                 whiteSpace={'nowrap'}
                 flexShrink={0}
                 color='black'
@@ -41,7 +41,7 @@ export const DesktopNav = ({ navItems, ...props }) => {
               <PopoverContent
                 border={0}
                 boxShadow={'xl'}
-                // eslint-disable-next-line react-hooks/rules-of-hooks
+                 
                 bg={'white'}
                 p={4}
                 rounded={'xl'}

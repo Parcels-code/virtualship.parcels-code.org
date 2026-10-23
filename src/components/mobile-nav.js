@@ -91,7 +91,7 @@ export const MobileNav = ({ navItems, isOpen }) => {
       minH={'calc(100vh - 60px)'}
       css={{
         backdropFilter: 'saturate(180%) blur(5px)',
-        // eslint-disable-next-line react-hooks/rules-of-hooks
+         
         backgroundColor: 'rgba(255, 255, 255, 0.8)',
       }}
     >
