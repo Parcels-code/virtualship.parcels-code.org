@@ -1,6 +1,6 @@
 ---
 title: 'VirtualShip v1.0 released!'
-date: '2026-10-23 11:00:00 +0200'
+date: '2026-10-23T11:00:00+02:00'
 authors:
   - name: Jamie Atkins
     github: j-atkins
