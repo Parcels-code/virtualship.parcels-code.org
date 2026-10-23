@@ -34,7 +34,7 @@ We're always interested in new collaborations and applications, in teaching, pro
 
 ### A personal note from lead developer Jamie Atkins
 
-Today is my last day [as the Captain of the VirtualShip](https://github.com/Parcels-code/virtualship.parcels-code.org/pull/XX), so this release is also a bit of a sign-off from me 🙃👨🏼‍✈️
+Today is my last day [as the Captain of the VirtualShip](https://github.com/Parcels-code/virtualship.parcels-code.org/pull/82), so this release is also a bit of a sign-off from me 🙃👨🏼‍✈️
 
 It has been such a pleasure working on this project and I will miss it. My favourite moments have been seeing students use the software and get genuinely excited about their expeditions, and seeing their immersion grow in subsequent courses as the software has matured. I'm proud of where the project has got to and I'm excited to keep an eye on where it goes next in the capable hands of the wider VirtualShip team and my replacement (more on that in a future blog post I should think...!).
 
