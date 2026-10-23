@@ -20,13 +20,13 @@ Other nice new features include:
 - Biogeochemical sensors for Argo floats, meaning the [BGC-Argo campaign](https://biogeochemical-argo.org/) can now be replicated in VirtualShip.
 - More realistic expedition planning, including time at waypoints that depends on real-life conditions such as seafloor depth (if you're using an instrument that needs to be winched to the seafloor!), and Argo floats behave sensibly in shallow water.
 - Closer integration with the [Marine Facilities Planning (MFP)](https://nioz.marinefacilitiesplanning.com/cruiselocationplanning#) tooling, making the integration between VirtualShip and the real-world expedition planning workflow even more seamless.
-- A "Real Life Challenges" module. Real expeditions rarely go exactly to plan. VirtualShip can now simulate "problems" during an expedition, such as equipment faults, logistical challenges. Students/practitioners learn to adapt their plans, just as they would on board. _Tip: Watch out for unexpected dolphin encounters!_
+- A "[Real Life Challenges](https://virtualship.readthedocs.io/en/latest/user-guide/user-profiles/educators/train-the-teacher/train_the_teacher.html#simulating-real-life-challenges)" module. Real expeditions rarely go exactly to plan. VirtualShip can now simulate "problems" during an expedition, such as equipment faults, logistical challenges. Students/practitioners learn to adapt their plans, just as they would on board. _Tip: Watch out for unexpected dolphin encounters!_
 
 We have also made an effort to make VirtualShip more accessible to a wider audience, including:
 
 - A revamped documentation site, with new entry points for Educators, Learners, Researchers and Developers. Check it out [here](https://virtualship.readthedocs.io/en/latest/user-guide/index.html)!
 - A sibling [virtualship-workspace](https://github.com/Parcels-code/virtualship-workspace) repository, dedicated to hosting pre-configured cloud-based programming environments for VirtualShip simulations and data post-processing. This allows users to use VirtualShip without needing to install anything locally, and is especially useful for teaching and workshops.
-- An interactive, snappy, terminal-based planning tool (`virtualship plan`), so you can design an expedition, choose instruments and sensors, and have your schedule checked as you go, without having to hand edit config files.
+- An interactive, snappy, terminal-based planning tool (`virtualship plan`), so users can design an expedition, choose instruments and sensors, and have the schedule checked as you go, without having to edit config files by hand.
 
 VirtualShip is available through `conda-forge`. See [here](https://virtualship.readthedocs.io/en/latest/#installation) for installation instructions.
 
