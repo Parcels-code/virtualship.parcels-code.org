@@ -23,7 +23,7 @@ export const DesktopNav = ({ navItems, ...props }) => {
                 href={navItem.href ?? '/#'}
                 fontSize={'sm'}
                 fontWeight={'bold'}
-                 
+
                 whiteSpace={'nowrap'}
                 flexShrink={0}
                 color='black'
@@ -41,7 +41,7 @@ export const DesktopNav = ({ navItems, ...props }) => {
               <PopoverContent
                 border={0}
                 boxShadow={'xl'}
-                 
+
                 bg={'white'}
                 p={4}
                 rounded={'xl'}
