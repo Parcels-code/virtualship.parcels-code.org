@@ -3,16 +3,16 @@ import {
   Box,
   Button,
   Container,
-  Divider,
   Flex,
   Heading,
+  Separator,
   Text,
   VStack,
   Wrap,
   WrapItem,
 } from '@chakra-ui/react'
 
-import { ArrowBackIcon } from '@chakra-ui/icons'
+import { LuArrowLeft } from 'react-icons/lu'
 
 import { MDXRemote } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
@@ -40,8 +40,8 @@ export default function Post({ source, frontmatter, postId }) {
     >
       <Box as={'section'}>
         <Container maxW='container.lg' py={10}>
-          <Box spacing='3' alignItems='start'>
-            <VStack paddingTop='30px' spacing='2' alignItems='center'>
+          <Box alignItems='start'>
+            <VStack paddingTop='30px' gap='2' alignItems='center'>
               <Heading as={'h1'} textAlign={'center'} size='xl' my={4}>
                 {frontmatter.title}
               </Heading>
@@ -49,7 +49,7 @@ export default function Post({ source, frontmatter, postId }) {
                 {formatDate(date)} ({distanceToNow(date)})
               </Text>
 
-              <Wrap spacing='20px'>
+              <Wrap gap='20px'>
                 {frontmatter.authors.map((author) => {
                   return (
                     <WrapItem key={author.name}>
@@ -63,19 +63,19 @@ export default function Post({ source, frontmatter, postId }) {
                           textDecoration: 'none',
                         }}
                       >
-                        <Avatar
-                          src={`https://github.com/${author.github}.png`}
-                          name={author.name}
-                          my={2}
-                          size={'lg'}
-                        />
+                        <Avatar.Root my={2} size={'2xl'}>
+                          <Avatar.Fallback name={author.name} />
+                          <Avatar.Image
+                            src={`https://github.com/${author.github}.png`}
+                          />
+                        </Avatar.Root>
                         <Text fontWeight={600}>{author.name}</Text>
                       </Flex>
                     </WrapItem>
                   )
                 })}
               </Wrap>
-              <Divider my={2} />
+              <Separator my={2} />
             </VStack>
             <br></br>
             <MDXRemote
@@ -89,12 +89,13 @@ export default function Post({ source, frontmatter, postId }) {
             as={Link}
             href={'/blog'}
             variant={'outline'}
-            leftIcon={<ArrowBackIcon />}
-            colorScheme={'blue'}
+            colorPalette={'blue'}
+            textDecoration='none'
           >
+            <LuArrowLeft />
             Back to Blog
           </Button>
-          <Divider my={8} />
+          <Separator my={8} />
           <br />
         </Container>
       </Box>

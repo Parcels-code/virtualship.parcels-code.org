@@ -30,11 +30,9 @@ const About = () => {
           <Box py={8}>
             <Text>
               VirtualShip is a collaborative project developed at{' '}
-              <Link href='https://www.uu.nl/en' isExternal>
-                Utrecht University
-              </Link>{' '}
-              in partnership with the{' '}
-              <Link href='https://www.nioz.nl/en' isExternal>
+              <Link href='https://www.uu.nl/en'>Utrecht University</Link> in
+              partnership with the{' '}
+              <Link href='https://www.nioz.nl/en'>
                 Royal Netherlands Institute for Sea Research (NIOZ)
               </Link>{' '}
               to advance how oceanographic fieldwork can be taught, planned, and
@@ -53,7 +51,7 @@ const About = () => {
               At the core of the project is the VirtualShip Python package,
               which simulates realistic instrument deployments, streaming
               environmental data directly from the{' '}
-              <Link href='https://marine.copernicus.eu/' isExternal>
+              <Link href='https://marine.copernicus.eu/'>
                 EU&apos;s Copernicus Marine Data Store
               </Link>
               . Alongside the software, VirtualShip includes VR/360° shipboard
@@ -71,12 +69,10 @@ const About = () => {
             <Text mt={4}>
               The project has already been trialled and integrated into 8
               teaching cycles at{' '}
-              <Link href='https://www.uu.nl/en' isExternal>
-                Utrecht University
-              </Link>{' '}
-              and is expanding through an NKO Scale-up grant for collaboration
-              with Wageningen University, RU Groningen, TU Delft, and the
-              University of Amsterdam.
+              <Link href='https://www.uu.nl/en'>Utrecht University</Link> and is
+              expanding through an NKO Scale-up grant for collaboration with
+              Wageningen University, RU Groningen, TU Delft, and the University
+              of Amsterdam.
             </Text>
           </Box>
         </Container>

@@ -6,12 +6,12 @@ import {
   Link,
   Grid,
   GridItem,
-  Tooltip,
 } from '@chakra-ui/react'
 import React from 'react'
 import { FindUs as data } from '@/data/findus'
 
 import { Heading } from '@/components/mdx'
+import { Tooltip } from '@/components/ui/tooltip'
 
 export const FindUs = () => {
   const findus = React.useMemo(() => data, [])
@@ -26,7 +26,7 @@ export const FindUs = () => {
             justifyContent='center'
           >
             {findus.map((item, index) => (
-              <Tooltip key={index} label={item.name}>
+              <Tooltip key={index} content={item.name}>
                 <GridItem
                   as={Link}
                   href={item.url}

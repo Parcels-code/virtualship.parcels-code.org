@@ -37,7 +37,7 @@ const Card = ({ frontmatter, id }) => {
             />
           </Flex>
 
-          <VStack align='stretch' spacing={16} my={12}>
+          <VStack align='stretch' gap={16} my={12}>
             <Heading as='h1' size='3xl' fontWeight='bold' lineHeight='1.2'>
               {frontmatter.title}
             </Heading>
@@ -50,13 +50,9 @@ const Card = ({ frontmatter, id }) => {
               gap={4}
             >
               <Flex align='center'>
-                <Icon
-                  as={MdOutlineCalendarToday}
-                  w={6}
-                  h={6}
-                  mr={2}
-                  color='gray.700'
-                />
+                <Icon w={6} h={6} mr={2} color='gray.700'>
+                  <MdOutlineCalendarToday />
+                </Icon>
                 <Text fontSize='lg' fontWeight='medium'>
                   {formatDate(date)}
                 </Text>
@@ -64,14 +60,17 @@ const Card = ({ frontmatter, id }) => {
             </Flex>
 
             <Flex align='center'>
-              <Icon as={MdPeopleOutline} w={6} h={6} mr={2} color='gray.700' />
-              <AvatarGroup size='xl' max={5} spacing='-0.75rem'>
-                {frontmatter.authors.map((author) => (
-                  <Avatar
-                    key={author.name}
-                    name={author.name}
-                    src={`https://github.com/${author.github}.png`}
-                  />
+              <Icon w={6} h={6} mr={2} color='gray.700'>
+                <MdPeopleOutline />
+              </Icon>
+              <AvatarGroup spaceX='-0.75rem'>
+                {frontmatter.authors.slice(0, 5).map((author) => (
+                  <Avatar.Root key={author.name} boxSize={24}>
+                    <Avatar.Fallback name={author.name} />
+                    <Avatar.Image
+                      src={`https://github.com/${author.github}.png`}
+                    />
+                  </Avatar.Root>
                 ))}
               </AvatarGroup>
             </Flex>

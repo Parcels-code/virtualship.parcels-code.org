@@ -8,11 +8,11 @@ export const HeroBanner = () => {
       <Container maxW='container.lg' pt={24} centerContent mb={0} pb={12}>
         <Stack
           align={'center'}
-          spacing={{ base: 8, md: 10 }}
+          gap={{ base: 8, md: 10 }}
           justify={'center'}
           direction={{ base: 'column', md: 'row' }}
         >
-          <Stack flex={1} spacing={{ base: 5, md: 10 }}>
+          <Stack flex={1} gap={{ base: 5, md: 10 }}>
             <Heading
               lineHeight={1.1}
               fontWeight={600}
@@ -45,7 +45,7 @@ export const HeroBanner = () => {
               if they were coming from actual oceanographic instruments.
             </Text>
           </Stack>
-          <Stack flex={1} spacing={{ base: 10, md: 20 }}>
+          <Stack flex={1} gap={{ base: 10, md: 20 }}>
             {
               <Image
                 src={'/homepage_image.png'}

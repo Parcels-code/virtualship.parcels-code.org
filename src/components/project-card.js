@@ -1,9 +1,9 @@
 import { Link } from '@/components/mdx'
-import { Box, Card, CardBody, Image, Stack, Text } from '@chakra-ui/react'
+import { Box, Card, Image, Stack, Text } from '@chakra-ui/react'
 
 export const ProjectCard = ({ name, description, repo, homepage, logo }) => {
   return (
-    <Card
+    <Card.Root
       as={Link}
       href={repo || homepage}
       p={4}
@@ -18,29 +18,23 @@ export const ProjectCard = ({ name, description, repo, homepage, logo }) => {
         textDecoration: 'none',
       }}
     >
-      <CardBody p={0}>
-        <Stack
-          spacing={2}
-          direction={'column'}
-          justify={'space-between'}
-          gap={0}
-        >
+      <Card.Body p={0}>
+        <Stack direction={'column'} justify={'space-between'} gap={0}>
           <Box>
             <Image
               h={'128'}
               w={'full'}
               src={logo}
               alt={name}
-              layout='fill'
               objectFit='contain'
             />
 
-            <Text my={4} noOfLines={4}>
+            <Text my={4} lineClamp={4}>
               {description}
             </Text>
           </Box>
         </Stack>
-      </CardBody>
-    </Card>
+      </Card.Body>
+    </Card.Root>
   )
 }
