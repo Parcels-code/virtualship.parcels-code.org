@@ -22,10 +22,14 @@ jobs:
 
       - name: Link Checker
         id: lychee
-        uses: lycheeverse/lychee-action@v1.8.0
+        uses: lycheeverse/lychee-action@v2.9.0
+        with:
+          # v2 fails the job on broken links by default; keep the old behaviour
+          # so the tracking issue below gets updated instead.
+          fail: false
 
       - name: Read Lychee report
-        if: env.lychee_exit_code != 0
+        if: steps.lychee.outputs.exit_code != 0
         id: readReport
         run: |
           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
@@ -34,7 +38,7 @@ jobs:
           echo "$EOF" >> $GITHUB_OUTPUT
       - run: echo "${{ steps.readReport.outputs.FILE_CONTENT }}"
       - name: Update link tracking issue (update invalid links)
-        if: env.lychee_exit_code != 0
+        if: steps.lychee.outputs.exit_code != 0
         uses: actions-cool/issues-helper@v3
         with:
           actions: 'update-issue'
@@ -45,7 +49,7 @@ jobs:
           update-mode: 'replace'
 
       - name: Update link tracking issue (no invalid links)
-        if: env.lychee_exit_code == 0
+        if: steps.lychee.outputs.exit_code == 0
         uses: actions-cool/issues-helper@v3
         with:
           actions: 'update-issue'
