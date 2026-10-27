@@ -54,7 +54,7 @@ const About = () => {
               which simulates realistic instrument deployments, streaming
               environmental data directly from the{' '}
               <Link href='https://marine.copernicus.eu/' isExternal>
-                EU's Copernicus Marine Data Store
+                EU&apos;s Copernicus Marine Data Store
               </Link>
               . Alongside the software, VirtualShip includes VR/360° shipboard
               immersive videos and educational materials that help bridge the

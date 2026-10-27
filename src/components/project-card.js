@@ -1,5 +1,5 @@
 import { Link } from '@/components/mdx'
-import { Box, Card, CardBody, Stack, Text } from '@chakra-ui/react'
+import { Box, Card, CardBody, Image, Stack, Text } from '@chakra-ui/react'
 
 export const ProjectCard = ({ name, description, repo, homepage, logo }) => {
   return (
