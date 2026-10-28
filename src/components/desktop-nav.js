@@ -1,60 +1,67 @@
 import { Link } from '@/components/mdx'
-import { ChevronRightIcon } from '@chakra-ui/icons'
 import {
   Box,
   Flex,
+  HoverCard,
   Icon,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
+  Portal,
   Stack,
   Text,
 } from '@chakra-ui/react'
+import { LuChevronRight } from 'react-icons/lu'
+
+const NavLink = ({ navItem, ...props }) => (
+  <Link
+    p={2}
+    href={navItem.href ?? '/#'}
+    fontSize={'sm'}
+    fontWeight={'bold'}
+    whiteSpace={'nowrap'}
+    flexShrink={0}
+    color='black'
+    textDecoration='none'
+    _hover={{
+      textDecoration: 'none',
+      color: 'black',
+    }}
+    {...props}
+  >
+    {navItem.label}
+  </Link>
+)
 
 export const DesktopNav = ({ navItems, ...props }) => {
   return (
-    <Stack direction={'row'} spacing={4} {...props}>
+    <Stack direction={'row'} gap={4} {...props}>
       {navItems.map((navItem) => (
         <Box key={navItem.label}>
-          <Popover trigger={'hover'} placement={'bottom-start'}>
-            <PopoverTrigger>
-              <Link
-                p={2}
-                href={navItem.href ?? '/#'}
-                fontSize={'sm'}
-                fontWeight={'bold'}
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                whiteSpace={'nowrap'}
-                flexShrink={0}
-                color='black'
-                textDecoration='none'
-                _hover={{
-                  textDecoration: 'none',
-                  color: 'black',
-                }}
-              >
-                {navItem.label}
-              </Link>
-            </PopoverTrigger>
-
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={'xl'}
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                bg={'white'}
-                p={4}
-                rounded={'xl'}
-                minW={'sm'}
-              >
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
-          </Popover>
+          {navItem.children ? (
+            <HoverCard.Root positioning={{ placement: 'bottom-start' }}>
+              <HoverCard.Trigger asChild>
+                <NavLink navItem={navItem} />
+              </HoverCard.Trigger>
+              <Portal>
+                <HoverCard.Positioner>
+                  <HoverCard.Content
+                    border={0}
+                    boxShadow={'xl'}
+                    bg={'white'}
+                    p={4}
+                    rounded={'xl'}
+                    minW={'sm'}
+                  >
+                    <Stack>
+                      {navItem.children.map((child) => (
+                        <DesktopSubNav key={child.label} {...child} />
+                      ))}
+                    </Stack>
+                  </HoverCard.Content>
+                </HoverCard.Positioner>
+              </Portal>
+            </HoverCard.Root>
+          ) : (
+            <NavLink navItem={navItem} />
+          )}
         </Box>
       ))}
     </Stack>
@@ -65,7 +72,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
     <Link
       href={href ?? '#'}
-      role={'group'}
+      className='group'
       display={'block'}
       p={2}
       rounded={'md'}
@@ -92,7 +99,9 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           align={'center'}
           flex={1}
         >
-          <Icon color={'blue.400'} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={'blue.400'} w={5} h={5}>
+            <LuChevronRight />
+          </Icon>
         </Flex>
       </Stack>
     </Link>

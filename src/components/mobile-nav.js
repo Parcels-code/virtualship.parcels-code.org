@@ -1,17 +1,17 @@
-import { ChevronDownIcon } from '@chakra-ui/icons'
 import {
-  Collapse,
+  Collapsible,
   Flex,
   Icon,
   Stack,
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
+import { LuChevronDown } from 'react-icons/lu'
 
 import { Link } from '@/components/mdx'
 
 const MobileNavItem = ({ href, children, label }) => {
-  const { isOpen, onToggle } = useDisclosure()
+  const { open, onToggle } = useDisclosure()
 
   const handleToggle = (e) => {
     if (children) {
@@ -21,7 +21,7 @@ const MobileNavItem = ({ href, children, label }) => {
   }
 
   return (
-    <Stack spacing={4} onClick={handleToggle}>
+    <Stack gap={0} onClick={handleToggle}>
       <Flex
         py={2}
         as={Link}
@@ -38,40 +38,43 @@ const MobileNavItem = ({ href, children, label }) => {
         </Text>
         {children && (
           <Icon
-            as={ChevronDownIcon}
             transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
+            transform={open ? 'rotate(180deg)' : ''}
             w={6}
             h={6}
-          />
+          >
+            <LuChevronDown />
+          </Icon>
         )}
       </Flex>
 
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={'solid'}
-          whiteSpace={'nowrap'}
-          borderColor={'gray.200'}
-          align={'start'}
-        >
-          {' '}
-          {children &&
-            children.map((child, index) => (
-              <Link
-                key={index}
-                href={child.href ?? '#'}
-                py={2}
-                color='black'
-                textDecoration='none'
-              >
-                {child.label}
-              </Link>
-            ))}
-        </Stack>
-      </Collapse>
+      <Collapsible.Root open={open}>
+        <Collapsible.Content>
+          <Stack
+            mt={2}
+            pl={4}
+            borderLeft={1}
+            borderStyle={'solid'}
+            whiteSpace={'nowrap'}
+            borderColor={'gray.200'}
+            align={'start'}
+          >
+            {' '}
+            {children &&
+              children.map((child, index) => (
+                <Link
+                  key={index}
+                  href={child.href ?? '#'}
+                  py={2}
+                  color='black'
+                  textDecoration='none'
+                >
+                  {child.label}
+                </Link>
+              ))}
+          </Stack>
+        </Collapsible.Content>
+      </Collapsible.Root>
     </Stack>
   )
 }
@@ -91,7 +94,6 @@ export const MobileNav = ({ navItems, isOpen }) => {
       minH={'calc(100vh - 60px)'}
       css={{
         backdropFilter: 'saturate(180%) blur(5px)',
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         backgroundColor: 'rgba(255, 255, 255, 0.8)',
       }}
     >

@@ -39,3 +39,4 @@ yarn-error.log*
 public/atom.xml
 public/rss.json
 public/rss.xml
+*.tsbuildinfo

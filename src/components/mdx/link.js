@@ -1,12 +1,11 @@
-import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { Link as ChakraLink } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import React from 'react'
+import { LuExternalLink } from 'react-icons/lu'
 
 export const Link = React.forwardRef(function CustomLink(props, ref) {
-  const href = props.href
+  const { href, children, useExternalIcon, ...rest } = props
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'))
-  const { useExternalIcon, ...rest } = props
   const defaultLinkStyles = {
     color: 'blue.600',
     textDecoration: 'underline',
@@ -20,22 +19,25 @@ export const Link = React.forwardRef(function CustomLink(props, ref) {
 
   if (isInternalLink) {
     return (
-      <ChakraLink as={NextLink} ref={ref} {...defaultLinkStyles} {...rest}>
-        {rest.children}
+      <ChakraLink asChild {...defaultLinkStyles} {...rest}>
+        <NextLink href={href} ref={ref}>
+          {children}
+        </NextLink>
       </ChakraLink>
     )
   }
 
   return (
-    <ChakraLink
-      isExternal
-      as={NextLink}
-      ref={ref}
-      {...defaultLinkStyles}
-      {...rest}
-    >
-      {rest.children}
-      {useExternalIcon && <ExternalLinkIcon mx='2px' />}
+    <ChakraLink asChild {...defaultLinkStyles} {...rest}>
+      <NextLink
+        href={href ?? '#'}
+        ref={ref}
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        {children}
+        {useExternalIcon && <LuExternalLink style={{ margin: '0 2px' }} />}
+      </NextLink>
     </ChakraLink>
   )
 })

@@ -6,11 +6,9 @@ import {
   Text,
   Link,
   Grid,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalBody,
-  ModalCloseButton,
+  Dialog,
+  CloseButton,
+  Portal,
   useDisclosure,
 } from '@chakra-ui/react'
 import React from 'react'
@@ -30,7 +28,7 @@ export const GetStarted = () => {
   const [previewInitialYawOffsetDeg, setPreviewInitialYawOffsetDeg] =
     React.useState(undefined)
   const {
-    isOpen: isImagePreviewOpen,
+    open: isImagePreviewOpen,
     onOpen: openImagePreview,
     onClose: closeImagePreview,
   } = useDisclosure()
@@ -108,7 +106,9 @@ export const GetStarted = () => {
           key={`${href}-${match.index}`}
           href={href}
           color='blue.700'
-          isExternal={isExternalLink}
+          {...(isExternalLink
+            ? { target: '_blank', rel: 'noopener noreferrer' }
+            : {})}
           textDecoration='underline'
           onClick={
             isExternalLink
@@ -383,6 +383,7 @@ export const GetStarted = () => {
                             <Button
                               mt={2}
                               size='sm'
+                              variant='subtle'
                               width='100%'
                               maxW='360px'
                               onClick={() =>
@@ -490,71 +491,86 @@ export const GetStarted = () => {
         </Box>
       </Container>
 
-      <Modal isOpen={isImagePreviewOpen} onClose={closeImagePreview} size='4xl'>
-        <ModalOverlay bg='blackAlpha.700' />
-        <ModalContent bg='white' boxShadow='lg'>
-          {previewImageType !== 'video' && (
-            <ModalCloseButton
-              color='black'
-              bg='white'
-              _hover={{ bg: 'gray.100' }}
-              zIndex={2}
-            />
-          )}
-          <ModalBody p={0} display='flex' justifyContent='center'>
-            {previewImageType === 'panorama' ? (
-              <Box width='100%' bg='white' borderRadius='md' px={2}>
-                <Panorama
-                  src={previewImageSrc}
-                  alt={previewImageAlt}
-                  height='70vh'
-                  hint='Drag to look around. On mobile, drag or move your device.'
-                  initialYawOffsetDeg={previewInitialYawOffsetDeg}
-                  onRequestClose={closeImagePreview}
-                />
-              </Box>
-            ) : isHtmlFigure(previewImageSrc) ||
-              isPdfFigure(previewImageSrc) ||
-              previewImageType === 'html' ? (
-              <Box
-                width='100%'
-                height='80vh'
-                borderRadius='md'
-                bg='white'
-                overflow='auto'
-              >
-                <Box
-                  as='iframe'
-                  src={previewImageSrc}
-                  title={previewImageAlt}
-                  width='100%'
-                  height='100%'
-                  border='none'
-                />
-              </Box>
-            ) : previewImageType === 'video' ? (
-              <Box width='100%' bg='white' borderRadius='md' px={2}>
-                <Panorama
-                  src={previewImageSrc}
-                  alt={previewImageAlt}
-                  height='70vh'
-                  hint='Drag to look around. On mobile, drag or move your device.'
-                  initialYawOffsetDeg={previewInitialYawOffsetDeg}
-                  onRequestClose={closeImagePreview}
-                />
-              </Box>
-            ) : (
-              <Image
-                src={previewImageSrc}
-                alt={previewImageAlt}
-                maxH='85vh'
-                width='auto'
-                borderRadius='md'
-              />
-            )}
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      <Dialog.Root
+        open={isImagePreviewOpen}
+        onOpenChange={(e) => {
+          if (!e.open) closeImagePreview()
+        }}
+      >
+        <Portal>
+          <Dialog.Backdrop bg='blackAlpha.700' />
+          <Dialog.Positioner>
+            <Dialog.Content bg='white' boxShadow='lg' maxW='4xl'>
+              {previewImageType !== 'video' && (
+                <Dialog.CloseTrigger asChild>
+                  <CloseButton
+                    size='sm'
+                    position='absolute'
+                    top={2}
+                    right={2}
+                    color='black'
+                    bg='white'
+                    _hover={{ bg: 'gray.100' }}
+                    zIndex={2}
+                  />
+                </Dialog.CloseTrigger>
+              )}
+              <Dialog.Body p={0} display='flex' justifyContent='center'>
+                {previewImageType === 'panorama' ? (
+                  <Box width='100%' bg='white' borderRadius='md' px={2}>
+                    <Panorama
+                      src={previewImageSrc}
+                      alt={previewImageAlt}
+                      height='70vh'
+                      hint='Drag to look around. On mobile, drag or move your device.'
+                      initialYawOffsetDeg={previewInitialYawOffsetDeg}
+                      onRequestClose={closeImagePreview}
+                    />
+                  </Box>
+                ) : isHtmlFigure(previewImageSrc) ||
+                  isPdfFigure(previewImageSrc) ||
+                  previewImageType === 'html' ? (
+                  <Box
+                    width='100%'
+                    height='80vh'
+                    borderRadius='md'
+                    bg='white'
+                    overflow='auto'
+                  >
+                    <Box
+                      as='iframe'
+                      src={previewImageSrc}
+                      title={previewImageAlt}
+                      width='100%'
+                      height='100%'
+                      border='none'
+                    />
+                  </Box>
+                ) : previewImageType === 'video' ? (
+                  <Box width='100%' bg='white' borderRadius='md' px={2}>
+                    <Panorama
+                      src={previewImageSrc}
+                      alt={previewImageAlt}
+                      height='70vh'
+                      hint='Drag to look around. On mobile, drag or move your device.'
+                      initialYawOffsetDeg={previewInitialYawOffsetDeg}
+                      onRequestClose={closeImagePreview}
+                    />
+                  </Box>
+                ) : (
+                  <Image
+                    src={previewImageSrc}
+                    alt={previewImageAlt}
+                    maxH='85vh'
+                    width='auto'
+                    borderRadius='md'
+                  />
+                )}
+              </Dialog.Body>
+            </Dialog.Content>
+          </Dialog.Positioner>
+        </Portal>
+      </Dialog.Root>
     </Box>
   )
 }

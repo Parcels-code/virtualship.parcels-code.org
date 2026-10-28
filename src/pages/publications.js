@@ -36,7 +36,7 @@ const vspublications = () => {
 
           <Box id='publications' />
 
-          <Accordion allowMultiple>
+          <Accordion.Root multiple variant='plain'>
             {VSPublications.reverse().map((paper, index, array) => (
               <Paper
                 key={paper.title}
@@ -48,7 +48,7 @@ const vspublications = () => {
                 number={array.length - index}
               />
             ))}
-          </Accordion>
+          </Accordion.Root>
         </Container>
       </Box>
     </Layout>

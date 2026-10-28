@@ -23,7 +23,7 @@ export const Projects = () => {
           <SimpleGrid
             my={8}
             columns={{ base: 1, md: 2, lg: 3 }}
-            spacing={8}
+            gap={8}
             justifyContent={'space-between'}
           >
             {projects.map((project, index) => (

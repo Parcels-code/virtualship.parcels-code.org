@@ -30,9 +30,10 @@ export const Heading = ({ children, ...props }) => (
           color='blue.500'
           fontWeight='normal'
           outline='none'
-          _focus={{
+          _focusVisible={{
             opacity: 1,
-            boxShadow: 'outline',
+            outline: '2px solid',
+            outlineColor: 'blue.500',
           }}
           opacity='0'
           ml='0.375rem'

@@ -30,7 +30,9 @@ const feed = new Feed({
             title: post.title,
             date: new Date(post.date),
             link: `${blogUrl}/${post.id}`,
-            id: post.id,
+            // Atom entry ids must be URIs (enforced since feed v6), so use
+            // the post's permalink rather than its bare slug.
+            id: `${blogUrl}/${post.id}`,
             author: post.authors,
             description: post.description,
         })

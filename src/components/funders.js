@@ -6,12 +6,12 @@ import {
   Link,
   Grid,
   GridItem,
-  Tooltip,
 } from '@chakra-ui/react'
 import React from 'react'
 import { Funders as data } from '@/data/funders'
 
 import { Heading } from '@/components/mdx'
+import { Tooltip } from '@/components/ui/tooltip'
 
 export const Funders = () => {
   const funders = React.useMemo(() => data, [])
@@ -31,7 +31,7 @@ export const Funders = () => {
             justifyContent='center'
           >
             {funders.map((funder, index) => (
-              <Tooltip key={index} label={funder.name}>
+              <Tooltip key={index} content={funder.name}>
                 <GridItem
                   as={Link}
                   href={funder.url}

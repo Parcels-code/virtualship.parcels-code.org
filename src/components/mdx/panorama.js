@@ -168,11 +168,15 @@ export const Panorama = ({
   useEffect(() => {
     let cancelled = false
 
+    // Reset viewer state whenever the panorama source changes, before the
+    // (async) viewer setup below runs.
+    /* eslint-disable react-hooks/set-state-in-effect */
     setViewerFailed(false)
     setViewerLoaded(false)
     setIsMuted(false)
     setGyroSupported(false)
     setGyroEnabled(false)
+    /* eslint-enable react-hooks/set-state-in-effect */
     gyroStateRef.current = {
       enabled: false,
       yaw: 0,

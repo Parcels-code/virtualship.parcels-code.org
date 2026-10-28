@@ -3,11 +3,10 @@ import {
   AvatarGroup,
   Box,
   Container,
-  Divider,
   Heading,
+  Separator,
   Spacer,
   Stack,
-  StackDivider,
   Text,
   VStack,
 } from '@chakra-ui/react'
@@ -30,7 +29,7 @@ const SinglePost = ({ page }) => {
       transition={{ duration: 0.2 }}
     >
       <Stack
-        spacing='2'
+        gap='2'
         align='stretch'
         my={{ base: 5, md: 10 }}
         direction={{ base: 'column', md: 'row' }}
@@ -44,20 +43,21 @@ const SinglePost = ({ page }) => {
             {formatDate(date)} ({distanceToNow(date)})
           </Text>
 
-          <Text noOfLines={3} py={4}>
+          <Text lineClamp={3} py={4}>
             {page.summary}
           </Text>
         </Box>
         <Spacer />
         <Box>
-          <AvatarGroup size={'lg'}>
+          <AvatarGroup size={'2xl'} spaceX={-3}>
             {page.authors.map((author) => {
               return (
-                <Avatar
-                  key={author.name}
-                  src={`https://github.com/${author.github}.png`}
-                  name={author.name}
-                />
+                <Avatar.Root key={author.name}>
+                  <Avatar.Fallback name={author.name} />
+                  <Avatar.Image
+                    src={`https://github.com/${author.github}.png`}
+                  />
+                </Avatar.Root>
               )
             })}
           </AvatarGroup>
@@ -85,18 +85,18 @@ export default function Blog({ allPostsData }) {
             Announcements and news from the VirtualShip team.
           </Text>
 
-          <Divider my={4} borderColor='gray.200' />
+          <Separator my={4} borderColor='gray.200' />
 
           <VStack
-            divider={<StackDivider borderColor='gray.200' />}
-            spacing={-4}
+            separator={<Separator my={-4} borderColor='gray.200' />}
+            gap={0}
             align='stretch'
           >
             {allPostsData.map((page) => {
               return <SinglePost key={page.id} page={page} />
             })}
           </VStack>
-          <Divider my={2} borderColor='gray.200' />
+          <Separator my={2} borderColor='gray.200' />
         </Container>
       </Box>
     </Layout>
