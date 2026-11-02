@@ -13,4 +13,4 @@ Now I will continue working on implementing the project at various universities 
 
 I did my bachelor's education in environmental and computer science at University College Roosevelt and followed the marine science master's programme at Utrecht University.
 
-Feel free to get in touch!
+Feel free to get in touch via [email here](mailto:s.r.bhagat@uu.nl)
